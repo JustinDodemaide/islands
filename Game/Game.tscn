@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://ci0fyadtl32hg"]
+
+[ext_resource type="Script" uid="uid://bjqbrkkpjog0d" path="res://Game/Game.gd" id="1_wbfu4"]
+
+[node name="Game" type="Node3D"]
+script = ExtResource("1_wbfu4")
+
+[node name="UpdateTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[connection signal="timeout" from="UpdateTimer" to="." method="_on_update_timer_timeout"]
