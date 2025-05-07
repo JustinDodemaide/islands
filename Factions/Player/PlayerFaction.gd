@@ -1,4 +1,5 @@
-extends Node
+extends Faction
+class_name PlayerFaction
 
 
 # Called when the node enters the scene tree for the first time.

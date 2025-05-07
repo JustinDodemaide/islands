@@ -14,6 +14,6 @@ func _generate():
 	pass
 
 func get_map() -> IslandMap:
-	var map = load("res://IslandMap/test_map.tscn").instantiate()
+	var map = load("res://IslandMap/IslandMap.tscn").instantiate()
 	map.init(self)
 	return map

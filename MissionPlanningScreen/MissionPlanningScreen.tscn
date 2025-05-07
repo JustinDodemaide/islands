@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://btejfc0fabfcp"]
+
+[ext_resource type="Script" uid="uid://bn4oosx1bbmhj" path="res://MissionPlanningScreen/MissionPlanningScreen.gd" id="1_5whae"]
+[ext_resource type="PackedScene" uid="uid://c2u5cdbffm38" path="res://MissionPlanningScreen/Podium/Podium.tscn" id="2_imdhe"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_imdhe"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0kwc5"]
+albedo_color = Color(0.20871, 0.20871, 0.20871, 1)
+
+[node name="MissionPlanningScreen" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -100, 0)
+script = ExtResource("1_5whae")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.991823, 0.127619, 0, -0.127619, 0.991823, 0, 0.571151, 2)
+fov = 50.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_imdhe")
+surface_material_override/0 = SubResource("StandardMaterial3D_0kwc5")
+
+[node name="Podium" parent="." instance=ExtResource("2_imdhe")]

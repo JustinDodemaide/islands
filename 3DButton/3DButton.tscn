@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://b3mkojwbs3xfi"]
+
+[ext_resource type="Script" uid="uid://clmfvqjw4utbd" path="res://3DButton/3DButton.gd" id="1_7n8kf"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_7n8kf"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_l3you"]
+size = Vector3(1, 1, 0.01)
+
+[node name="3DButton" type="Sprite3D"]
+texture = SubResource("ViewportTexture_7n8kf")
+script = ExtResource("1_7n8kf")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_l3you")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+
+[node name="Button" type="Button" parent="SubViewport"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -61.0
+offset_top = -15.5
+offset_right = 61.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "placeholder🐵"
+
+[connection signal="mouse_entered" from="Area3D" to="." method="_on_area_3d_mouse_entered"]
+[connection signal="mouse_exited" from="Area3D" to="." method="_on_area_3d_mouse_exited"]

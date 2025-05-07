@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpbd6mk8pm80q"]
+
+[ext_resource type="PackedScene" uid="uid://cpkkkljmrnxvx" path="res://Room/Furniture/Monitor/mesh/new.glb" id="1_g4jwm"]
+
+[node name="Monitor" type="Node3D"]
+
+[node name="new" parent="." instance=ExtResource("1_g4jwm")]

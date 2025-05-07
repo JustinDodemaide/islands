@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://bip6mnmtih62q"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_vi2sf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bycv0"]
+albedo_color = Color(0.473976, 0.473976, 0.473976, 1)
+
+[node name="6walls" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_vi2sf")
+surface_material_override/0 = SubResource("StandardMaterial3D_bycv0")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1, -1)
+mesh = SubResource("PlaneMesh_vi2sf")
+surface_material_override/0 = SubResource("StandardMaterial3D_bycv0")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, -1, 1, 0)
+mesh = SubResource("PlaneMesh_vi2sf")
+surface_material_override/0 = SubResource("StandardMaterial3D_bycv0")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, 1, 1, 0)
+mesh = SubResource("PlaneMesh_vi2sf")
+surface_material_override/0 = SubResource("StandardMaterial3D_bycv0")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 8.74228e-08, -3.82137e-15, 0, -4.37114e-08, -1, -8.74228e-08, -1, 4.37114e-08, 0, 1, 1)
+mesh = SubResource("PlaneMesh_vi2sf")
+surface_material_override/0 = SubResource("StandardMaterial3D_bycv0")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 8.74228e-08, -4.21108e-15, -8.74228e-08, -1, 0, 0, 0, 1, 0, 2, 0)
+mesh = SubResource("PlaneMesh_vi2sf")
+surface_material_override/0 = SubResource("StandardMaterial3D_bycv0")

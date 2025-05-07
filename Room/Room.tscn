@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://2eaf8ryhkaej"]
+
+[ext_resource type="PackedScene" uid="uid://bbxi7qe8q3py" path="res://IslandMap/IslandMap.tscn" id="1_63o6j"]
+[ext_resource type="PackedScene" uid="uid://cpkkkljmrnxvx" path="res://Room/Furniture/Monitor/mesh/new.glb" id="1_gr7xt"]
+[ext_resource type="PackedScene" uid="uid://bip6mnmtih62q" path="res://Room/Furniture/6walls.tscn" id="2_fn5ws"]
+[ext_resource type="PackedScene" uid="uid://8cqnfomn7a7w" path="res://Room/Furniture/Desk/desk.glb" id="4_gr7xt"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_7j6ko"]
+viewport_path = NodePath("Monitor/Sprite3D/SubViewport")
+
+[sub_resource type="BoxMesh" id="BoxMesh_sko6s"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.999777, 0.0025185, -0.0209837, 4.45497e-10, 0.992874, 0.119167, 0.0211343, -0.11914, 0.992652, 0, 0.971497, 0.145583)
+fov = 50.0
+
+[node name="Monitor" parent="." instance=ExtResource("1_gr7xt")]
+transform = Transform3D(-0.314871, 0, -0.949135, 0, 1, 0, 0.949135, 0, -0.314871, 0.259655, 0.929938, -0.755918)
+
+[node name="Sprite3D" type="Sprite3D" parent="Monitor"]
+transform = Transform3D(-1.5299e-09, 0, 0.035, 0, 0.035, 0, -0.035, 0, -1.5299e-09, 0.216594, 0, 0)
+texture = SubResource("ViewportTexture_7j6ko")
+
+[node name="SubViewport" type="SubViewport" parent="Monitor/Sprite3D"]
+size = Vector2i(1024, 768)
+
+[node name="IslandMap" parent="Monitor/Sprite3D/SubViewport" instance=ExtResource("1_63o6j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.92646, 0)
+
+[node name="6walls" parent="." instance=ExtResource("2_fn5ws")]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.67159, 0)
+light_color = Color(0.0705882, 0.305882, 0.537255, 1)
+light_energy = 3.0
+
+[node name="desk2" parent="." instance=ExtResource("4_gr7xt")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.69556, -0.685782)
+
+[node name="1 meter" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.733402, 0)
+visible = false
+mesh = SubResource("BoxMesh_sko6s")

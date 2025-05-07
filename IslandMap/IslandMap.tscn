@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbxi7qe8q3py"]
+
+[ext_resource type="Script" uid="uid://c2qija0enidrh" path="res://IslandMap/IslandMap.gd" id="1_oojqo"]
+[ext_resource type="Texture2D" uid="uid://cawlqc10ifvcq" path="res://Island/island.png" id="2_8kqt0"]
+[ext_resource type="PackedScene" uid="uid://exk7krmqggfq" path="res://MapUI/MapUI.tscn" id="3_8kqt0"]
+
+[node name="IslandMap" type="Node3D"]
+script = ExtResource("1_oojqo")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+texture = ExtResource("2_8kqt0")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 5, 4)
+
+[node name="MapUI" parent="." instance=ExtResource("3_8kqt0")]

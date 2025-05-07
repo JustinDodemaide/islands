@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://mngxbnxepwgr"]
+
+[ext_resource type="Script" uid="uid://c743tav151ye5" path="res://SelectionOptionsMenu/SelectionOptionCard.gd" id="1_req2r"]
+
+[node name="SelectionOptionCard" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("1_req2r")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
