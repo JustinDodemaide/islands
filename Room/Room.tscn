@@ -1,8 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://2eaf8ryhkaej"]
+[gd_scene load_steps=14 format=3 uid="uid://2eaf8ryhkaej"]
 
-[ext_resource type="PackedScene" uid="uid://bbxi7qe8q3py" path="res://IslandMap/IslandMap.tscn" id="1_63o6j"]
 [ext_resource type="PackedScene" uid="uid://cpkkkljmrnxvx" path="res://Room/Furniture/Monitor/mesh/new.glb" id="1_gr7xt"]
 [ext_resource type="Script" uid="uid://sm8qvxdmrnm4" path="res://Room/Room.gd" id="1_wyylc"]
+[ext_resource type="PackedScene" uid="uid://cir6cram2u4vs" path="res://Island/Island.tscn" id="3_wyylc"]
 [ext_resource type="PackedScene" uid="uid://8cqnfomn7a7w" path="res://Room/Furniture/Desk/desk.glb" id="4_gr7xt"]
 [ext_resource type="PackedScene" uid="uid://bigt2s6n38xrp" path="res://Room/Furniture/Room/room.glb" id="4_sko6s"]
 [ext_resource type="PackedScene" uid="uid://dyrbwgxq3xlyv" path="res://Room/Furniture/Frame/frame.glb" id="5_sko6s"]
@@ -14,6 +14,9 @@
 [sub_resource type="BoxMesh" id="BoxMesh_sko6s"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_7j6ko"]
+viewport_path = NodePath("Monitor/Sprite3D/SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_n4h2d"]
 viewport_path = NodePath("Monitor/Sprite3D/SubViewport")
 
 [node name="Room" type="Node3D"]
@@ -30,6 +33,7 @@ fov = 50.0
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.164652, 0.986352, 0, -0.986352, 0.164652, -0.641633, 1.67159, 0.276217)
+visible = false
 light_color = Color(0.964706, 0.803922, 0.545098, 1)
 light_energy = 2.5
 shadow_enabled = true
@@ -51,21 +55,19 @@ texture = SubResource("ViewportTexture_7j6ko")
 [node name="SubViewport" type="SubViewport" parent="Monitor/Sprite3D"]
 size = Vector2i(1024, 768)
 
-[node name="IslandMap" parent="Monitor/Sprite3D/SubViewport" instance=ExtResource("1_63o6j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.92646, -8.61331)
+[node name="Island" parent="Monitor/Sprite3D/SubViewport" instance=ExtResource("3_wyylc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -12.0317, 0)
 
 [node name="Monitor2" parent="." instance=ExtResource("1_gr7xt")]
 transform = Transform3D(0.645644, 0, -0.763639, 0, 1, 0, 0.763639, 0, 0.645644, -0.727271, 0.929938, -0.712748)
 
 [node name="Sprite3D" type="Sprite3D" parent="Monitor2"]
 transform = Transform3D(-1.5299e-09, 0, 0.035, 0, 0.035, 0, -0.035, 0, -1.5299e-09, 0.216594, 0, 0)
-texture = SubResource("ViewportTexture_7j6ko")
+texture = SubResource("ViewportTexture_n4h2d")
 
 [node name="SubViewport" type="SubViewport" parent="Monitor2/Sprite3D"]
+transparent_bg = true
 size = Vector2i(1024, 768)
-
-[node name="IslandMap" parent="Monitor2/Sprite3D/SubViewport" instance=ExtResource("1_63o6j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.92646, -8.61331)
 
 [node name="Desk" parent="." instance=ExtResource("4_gr7xt")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.296344, 0.69556, -0.580519)

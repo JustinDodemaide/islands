@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://darxgx3cspbte"]
+
+[ext_resource type="Shader" uid="uid://dmy5hhq4gu3ej" path="res://Ocean/OceanTest.gdshader" id="1_hm48d"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_y5bps"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_n4h2d"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5kue4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lcoht"]
+render_priority = 0
+shader = ExtResource("1_hm48d")
+shader_parameter/base_color = Color(0, 0.6, 0.858824, 0.509804)
+shader_parameter/noise_texture_1 = SubResource("NoiseTexture2D_n4h2d")
+shader_parameter/wave_speed_1 = 0.25
+shader_parameter/wave_direction_1 = Vector2(1, 0.3)
+shader_parameter/wave_scale_1 = 20.0
+shader_parameter/noise_texture_2 = SubResource("NoiseTexture2D_5kue4")
+shader_parameter/wave_speed_2 = 0.25
+shader_parameter/wave_direction_2 = Vector2(-0.4, 0.8)
+shader_parameter/wave_scale_2 = 20.0
+shader_parameter/vertex_wave_strength = 0.01
+shader_parameter/color_noise_influence = 0.1
+
+[node name="MeshInstance3D" type="MeshInstance3D"]
+transform = Transform3D(10000, 0, 0, 0, 1, 0, 0, 0, 10000, 0, 0, 0)
+mesh = SubResource("PlaneMesh_y5bps")
+surface_material_override/0 = SubResource("ShaderMaterial_lcoht")

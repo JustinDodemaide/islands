@@ -6,7 +6,7 @@ var current_setup:String = initial_setup
 var setup_index:int = 1
 var setup_order = ["wide","monitor1","selection_apparatus"]
 
-const TRANSITION_TIME = 2
+const TRANSITION_TIME = 1.5
 
 const CAMERA_POSITIONS = {
 	"wide":Vector3(0.035,1.1,0.5),

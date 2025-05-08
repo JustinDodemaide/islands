@@ -29,7 +29,6 @@ shape = SubResource("BoxShape3D_q46y3")
 transform = Transform3D(-6.99382e-09, 0, 0.16, 0, 0.16, 0, -0.16, 0, -6.99382e-09, 0.0622469, 0, -0.0587078)
 shaded = true
 texture_filter = 0
-text = "BUTTON"
 font = ExtResource("4_s4qph")
 outline_size = 0
 
