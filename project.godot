@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Islands"
-run/main_scene="uid://ci0fyadtl32hg"
+run/main_scene="uid://2eaf8ryhkaej"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 

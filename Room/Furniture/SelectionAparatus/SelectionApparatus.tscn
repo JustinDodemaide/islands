@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqpmu7w1wvmtb"]
+
+[ext_resource type="PackedScene" uid="uid://dstm37ja4g27k" path="res://Room/Furniture/SelectionAparatus/AppartusUnit/SelectionAparatusUnit.tscn" id="1_bmqf2"]
+
+[node name="SelectionApparatus" type="Node3D"]
+
+[node name="SelectionAparatusUnit" parent="." instance=ExtResource("1_bmqf2")]
+
+[node name="SelectionAparatusUnit2" parent="." instance=ExtResource("1_bmqf2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.024963, 0)
+
+[node name="SelectionAparatusUnit3" parent="." instance=ExtResource("1_bmqf2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+
+[node name="SelectionAparatusUnit4" parent="." instance=ExtResource("1_bmqf2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.075, 0)
+
+[node name="SelectionAparatusUnit5" parent="." instance=ExtResource("1_bmqf2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+
+[node name="SelectionAparatusUnit6" parent="." instance=ExtResource("1_bmqf2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
+
+[node name="SelectionAparatusUnit7" parent="." instance=ExtResource("1_bmqf2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+
+[node name="SelectionAparatusUnit8" parent="." instance=ExtResource("1_bmqf2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.175, 0)

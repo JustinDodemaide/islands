@@ -1,23 +1,48 @@
-[gd_scene load_steps=7 format=3 uid="uid://2eaf8ryhkaej"]
+[gd_scene load_steps=13 format=3 uid="uid://2eaf8ryhkaej"]
 
 [ext_resource type="PackedScene" uid="uid://bbxi7qe8q3py" path="res://IslandMap/IslandMap.tscn" id="1_63o6j"]
 [ext_resource type="PackedScene" uid="uid://cpkkkljmrnxvx" path="res://Room/Furniture/Monitor/mesh/new.glb" id="1_gr7xt"]
-[ext_resource type="PackedScene" uid="uid://bip6mnmtih62q" path="res://Room/Furniture/6walls.tscn" id="2_fn5ws"]
+[ext_resource type="Script" uid="uid://sm8qvxdmrnm4" path="res://Room/Room.gd" id="1_wyylc"]
 [ext_resource type="PackedScene" uid="uid://8cqnfomn7a7w" path="res://Room/Furniture/Desk/desk.glb" id="4_gr7xt"]
+[ext_resource type="PackedScene" uid="uid://bigt2s6n38xrp" path="res://Room/Furniture/Room/room.glb" id="4_sko6s"]
+[ext_resource type="PackedScene" uid="uid://dyrbwgxq3xlyv" path="res://Room/Furniture/Frame/frame.glb" id="5_sko6s"]
+[ext_resource type="PackedScene" uid="uid://b4e2r1sph8523" path="res://Room/Furniture/Lamp/lamp.glb" id="6_soc6w"]
+[ext_resource type="PackedScene" uid="uid://cfbnx08pjdta" path="res://Room/Furniture/Computer/computer.glb" id="7_2qh2i"]
+[ext_resource type="PackedScene" uid="uid://derjy6jcpk6sx" path="res://Room/Furniture/Cup/cup.glb" id="8_6mart"]
+[ext_resource type="PackedScene" uid="uid://cqpmu7w1wvmtb" path="res://Room/Furniture/SelectionAparatus/SelectionApparatus.tscn" id="10_wyylc"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_sko6s"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_7j6ko"]
 viewport_path = NodePath("Monitor/Sprite3D/SubViewport")
 
-[sub_resource type="BoxMesh" id="BoxMesh_sko6s"]
+[node name="Room" type="Node3D"]
+script = ExtResource("1_wyylc")
 
-[node name="Node3D" type="Node3D"]
+[node name="1 meter" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.733402, 0)
+visible = false
+mesh = SubResource("BoxMesh_sko6s")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.999777, 0.0025185, -0.0209837, 4.45497e-10, 0.992874, 0.119167, 0.0211343, -0.11914, 0.992652, 0, 0.971497, 0.145583)
+transform = Transform3D(0.999575, 0, -0.0291429, 0, 1, 0, 0.0291429, 0, 0.999575, 0.164083, 0.92822, -0.19907)
 fov = 50.0
 
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.164652, 0.986352, 0, -0.986352, 0.164652, -0.641633, 1.67159, 0.276217)
+light_color = Color(0.964706, 0.803922, 0.545098, 1)
+light_energy = 2.5
+shadow_enabled = true
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="."]
+transform = Transform3D(0.673464, 0.121714, 0.729131, -0.73922, 0.110887, 0.664273, 0, -0.986352, 0.164652, 0.652029, 1.03908, -0.386601)
+visible = false
+light_color = Color(0.964706, 0.803922, 0.545098, 1)
+light_energy = 0.5
+shadow_enabled = true
+
 [node name="Monitor" parent="." instance=ExtResource("1_gr7xt")]
-transform = Transform3D(-0.314871, 0, -0.949135, 0, 1, 0, 0.949135, 0, -0.314871, 0.259655, 0.929938, -0.755918)
+transform = Transform3D(-0.229659, 0, -0.973271, 0, 1, 0, 0.973271, 0, -0.229659, 0.287107, 0.929938, -0.70839)
 
 [node name="Sprite3D" type="Sprite3D" parent="Monitor"]
 transform = Transform3D(-1.5299e-09, 0, 0.035, 0, 0.035, 0, -0.035, 0, -1.5299e-09, 0.216594, 0, 0)
@@ -27,19 +52,44 @@ texture = SubResource("ViewportTexture_7j6ko")
 size = Vector2i(1024, 768)
 
 [node name="IslandMap" parent="Monitor/Sprite3D/SubViewport" instance=ExtResource("1_63o6j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.92646, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.92646, -8.61331)
 
-[node name="6walls" parent="." instance=ExtResource("2_fn5ws")]
+[node name="Monitor2" parent="." instance=ExtResource("1_gr7xt")]
+transform = Transform3D(0.645644, 0, -0.763639, 0, 1, 0, 0.763639, 0, 0.645644, -0.727271, 0.929938, -0.712748)
 
-[node name="SpotLight3D" type="SpotLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.67159, 0)
-light_color = Color(0.0705882, 0.305882, 0.537255, 1)
-light_energy = 3.0
+[node name="Sprite3D" type="Sprite3D" parent="Monitor2"]
+transform = Transform3D(-1.5299e-09, 0, 0.035, 0, 0.035, 0, -0.035, 0, -1.5299e-09, 0.216594, 0, 0)
+texture = SubResource("ViewportTexture_7j6ko")
 
-[node name="desk2" parent="." instance=ExtResource("4_gr7xt")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.69556, -0.685782)
+[node name="SubViewport" type="SubViewport" parent="Monitor2/Sprite3D"]
+size = Vector2i(1024, 768)
 
-[node name="1 meter" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.733402, 0)
-visible = false
-mesh = SubResource("BoxMesh_sko6s")
+[node name="IslandMap" parent="Monitor2/Sprite3D/SubViewport" instance=ExtResource("1_63o6j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.92646, -8.61331)
+
+[node name="Desk" parent="." instance=ExtResource("4_gr7xt")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.296344, 0.69556, -0.580519)
+
+[node name="Walls" parent="." instance=ExtResource("4_sko6s")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="Frame" parent="." instance=ExtResource("5_sko6s")]
+transform = Transform3D(-0.704854, 0.191967, -0.682884, 0.278617, 0.96024, -0.0176463, 0.652345, -0.202701, -0.730314, 0.895961, 0.825047, -0.389162)
+
+[node name="Lamp" parent="." instance=ExtResource("6_soc6w")]
+transform = Transform3D(-0.347, 0, -0.775945, 0, 0.85, 0, 0.775945, 0, -0.347, 0.814666, 0.745608, -0.542118)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lamp"]
+transform = Transform3D(0.931454, 0.709296, 0.115655, -0.144965, 2.5125e-08, 1.16751, 0.703891, -0.938607, 0.0873998, 0.208962, 0.275984, 0.0439665)
+light_color = Color(0.964706, 0.803922, 0.545098, 1)
+light_energy = 1.325
+spot_range = 1.0
+
+[node name="Computer" parent="." instance=ExtResource("7_2qh2i")]
+transform = Transform3D(-0.104528, 0, -0.994522, 0, 1, 0, 0.994522, 0, -0.104528, 0.599807, 0.884668, -0.642994)
+
+[node name="Cup" parent="." instance=ExtResource("8_6mart")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.247175, 0.770966, -0.574723)
+
+[node name="SelectionApparatus" parent="." instance=ExtResource("10_wyylc")]
+transform = Transform3D(0.465923, 0, -0.884825, 0, 1, 0, 0.884825, 0, 0.465923, -0.11017, 0.836075, -0.559843)
