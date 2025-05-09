@@ -15,3 +15,6 @@ emission_energy_multiplier = 5.1
 mesh = SubResource("BoxMesh_02iug")
 surface_material_override/0 = SubResource("StandardMaterial3D_q2104")
 script = ExtResource("1_d56jo")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(0.635294, 0.14902, 0.2, 1)
