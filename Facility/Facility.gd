@@ -1,3 +1,4 @@
+extends Node3D
 class_name Facility
 
 var occupied_by:Faction
