@@ -11,43 +11,48 @@ func make_3d_model(island) -> MeshInstance3D:
 	var tile_to_feet_ratio = 1
 	# Create the mesh for the island
 	if island.tiles.is_empty():
-		return
+		return null
 	
 	# Create mesh data
 	var st = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 	
-	# Generate vertices grid
-	for x in island.WIDTH + 1:
-		for y in island.HEIGHT + 1:
-			var pos = Vector2(x,y)
-			
-			if !island.tiles.has(pos):
-				continue
-			var altitude = island.tiles[pos].altitude
-			
-			st.set_uv(pos * tile_to_feet_ratio)
-			# Add vertex - scale x and z by tile_size
-			st.add_vertex(Vector3(x, altitude, y) * tile_to_feet_ratio)
-			print("adding vertex at ", pos)
+	# Create a mapping of positions to vertex indices
+	var position_to_index = {}
+	var index = 0
 	
-	# Create triangles by connecting vertices
+	# First pass: add all vertices and map their positions to indices
+	for pos in island.tiles.keys():
+		var x = pos.x
+		var y = pos.y
+		var altitude = island.tiles[pos].altitude
+		
+		st.set_uv(pos * tile_to_feet_ratio)
+		st.add_vertex(Vector3(x, altitude, y) * tile_to_feet_ratio)
+		position_to_index[pos] = index
+		index += 1
+	
+	# Second pass: create triangles only where all required vertices exist
 	for x in island.WIDTH:
 		for y in island.HEIGHT:
-			var i00 = y * (island.WIDTH + 1) + x
-			var i10 = y * (island.WIDTH + 1) + x + 1
-			var i01 = (y + 1) * (island.WIDTH + 1) + x
-			var i11 = (y + 1) * (island.WIDTH + 1) + x + 1
+			var pos00 = Vector2(x, y)
+			var pos10 = Vector2(x + 1, y)
+			var pos01 = Vector2(x, y + 1)
+			var pos11 = Vector2(x + 1, y + 1)
 			
-			# First triangle
-			st.add_index(i00)
-			st.add_index(i10)
-			st.add_index(i01)
-			
-			# Second triangle
-			st.add_index(i10)
-			st.add_index(i11)
-			st.add_index(i01)
+			# Only create a quad if all four corners exist
+			if position_to_index.has(pos00) and position_to_index.has(pos10) and \
+			   position_to_index.has(pos01) and position_to_index.has(pos11):
+				
+				# First triangle
+				st.add_index(position_to_index[pos00])
+				st.add_index(position_to_index[pos10])
+				st.add_index(position_to_index[pos01])
+				
+				# Second triangle
+				st.add_index(position_to_index[pos10])
+				st.add_index(position_to_index[pos11])
+				st.add_index(position_to_index[pos01])
 	
 	# Material
 	st.set_material(preload("res://IslandDisplay/placeholder.tres"))
