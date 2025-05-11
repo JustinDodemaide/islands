@@ -1,6 +1,11 @@
 extends Node3D
 
-@export var island:Node3D
+var game:Game
+
+func game_done_initializing():
+	# activate the game display and island display
+	game = get_parent()
+	$Monitor/IslandDisplay.init(game.active_island)
 
 @onready var camera = $Camera3D
 @export var initial_setup:String = "wide"
@@ -23,8 +28,6 @@ const CAMERA_ROTATIONS = {
 }
 
 func _ready() -> void:
-	$Monitor/Sprite3D.texture.viewport_path = "SubViewport"
-	
 	camera.position = CAMERA_POSITIONS[initial_setup]
 	camera.rotation_degrees = CAMERA_ROTATIONS[initial_setup]
 

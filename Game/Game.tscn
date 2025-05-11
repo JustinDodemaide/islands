@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://ci0fyadtl32hg"]
+
+[ext_resource type="Script" uid="uid://bjqbrkkpjog0d" path="res://Game/Game.gd" id="1_hqwdr"]
+[ext_resource type="PackedScene" uid="uid://2eaf8ryhkaej" path="res://Room/Room.tscn" id="2_vrr3t"]
+
+[node name="Game" type="Node"]
+script = ExtResource("1_hqwdr")
+
+[node name="UpdateTimer" type="Timer" parent="."]
+
+[node name="Room" parent="." instance=ExtResource("2_vrr3t")]
+
+[connection signal="timeout" from="UpdateTimer" to="." method="_on_update_timer_timeout"]

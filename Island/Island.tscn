@@ -1,9 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://cir6cram2u4vs"]
+[gd_scene load_steps=11 format=3 uid="uid://cir6cram2u4vs"]
 
 [ext_resource type="Script" uid="uid://2grd50wjyux7" path="res://Island/Island.gd" id="1_v0odn"]
 [ext_resource type="Texture2D" uid="uid://b6ap0gnm5tdpv" path="res://Skybox/AllSkyFree_Sky_ClearBlueSky_Equirect.png" id="2_v0odn"]
 [ext_resource type="PackedScene" uid="uid://dgivcc1saap0d" path="res://Facility/Facility.tscn" id="2_xaj81"]
-[ext_resource type="Texture2D" uid="uid://it6jit80xyoq" path="res://Island/dot.png" id="3_krxgu"]
 [ext_resource type="PackedScene" uid="uid://2eaf8ryhkaej" path="res://Room/Room.tscn" id="4_v0odn"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_hg4pp"]
@@ -23,7 +22,6 @@ size = Vector2(1609.34, 1609.34)
 albedo_color = Color(0.752941, 0.796078, 0.862745, 1)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_v0odn"]
-viewport_path = NodePath("SubViewport")
 
 [node name="Island" type="Node3D"]
 script = ExtResource("1_v0odn")
@@ -35,41 +33,12 @@ environment = SubResource("Environment_xaj81")
 mesh = SubResource("PlaneMesh_b0n85")
 surface_material_override/0 = SubResource("StandardMaterial3D_v0odn")
 
-[node name="SubViewport" type="SubViewport" parent="."]
-size = Vector2i(1024, 768)
-
-[node name="Camera3D" type="Camera3D" parent="SubViewport"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1250, 0)
-fov = 24.0
-
-[node name="RayCast3D" type="RayCast3D" parent="SubViewport/Camera3D"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-target_position = Vector3(0, -10000, 0)
-collision_mask = 2
-collide_with_areas = true
-collide_with_bodies = false
-
-[node name="Sprite3D" type="Sprite3D" parent="SubViewport/Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
-texture = ExtResource("3_krxgu")
-
-[node name="HoverIndicator" type="Label3D" parent="."]
-transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
-billboard = 1
-text = "HOVERED"
-
 [node name="Room" parent="." instance=ExtResource("4_v0odn")]
 
-[node name="Sprite3D" parent="Room/Monitor" index="2" node_paths=PackedStringArray("raycast", "hover_indicator", "island_camera")]
-transform = Transform3D(-1.40539e-05, 0, 0.035, 0, 0.035, 0, -0.035, 0, -1.40539e-05, 0.21619, -6.19888e-05, -0.000101358)
+[node name="IslandDisplay" parent="Room/Monitor" index="2"]
 texture = SubResource("ViewportTexture_v0odn")
-raycast = NodePath("../../../SubViewport/Camera3D/RayCast3D")
-hover_indicator = NodePath("../../../HoverIndicator")
-island_camera = NodePath("../../../SubViewport/Camera3D")
 
 [node name="Facility" parent="." instance=ExtResource("2_xaj81")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.7579, 5.14152, -18.5817)
-
-[connection signal="ready" from="." to="Room/Monitor/Sprite3D" method="_on_island_ready"]
 
 [editable path="Room"]

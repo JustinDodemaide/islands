@@ -1,20 +1,43 @@
 extends Node3D
 class_name Island
 
-var game:Game
-var facilities:Array[Facility] = [
-	load("res://Facility/Facility.gd").new(),
-]
+var HEIGHT = 100
+var WIDTH = 100
+var tiles = {}
+var facilities = []
 
-func _init(game:Game,file = null) -> void:
-	self.game = game
-	if not file:
-		_generate()
+func new():
+	_generate()
 
-func _generate():
+func from_file(file = null):
 	pass
 
-func get_map() -> IslandMap:
-	var map = load("res://IslandMap/IslandMap.tscn").instantiate()
-	map.init(self)
-	return map
+class IslandTile:
+	var pos:Vector2
+	var altitude:float
+	func _init(pos:Vector2) -> void:
+		self.pos = pos
+
+func _generate():
+	# Make the island's terrain
+	var center_x = WIDTH / 2
+	var center_y = HEIGHT / 2
+	var radius = 5
+
+	for y in range(HEIGHT):
+		for x in range(WIDTH):
+			# Calculate distance from this tile to the center
+			var distance = sqrt(pow(x - center_x, 2) + pow(y - center_y, 2))
+			
+			# If the tile is within the radius, make it part of the island
+			if distance <= radius:
+				# Create a new IslandTile for this position
+				var tile = IslandTile.new(Vector2(x,y))
+				tiles[Vector2(x,y)] = tile
+	
+	# Place the facilities
+	var num_facilities = 3
+	for i in num_facilities:
+		var tile = tiles.keys().pick_random()
+		var facility = load("res://Facility/Facility.gd").new(tile)
+		facilities.append(facility)

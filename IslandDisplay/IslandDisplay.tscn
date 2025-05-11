@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2iedvlngsahw"]
+
+[ext_resource type="Script" uid="uid://dwsueb2ncwh1f" path="res://IslandDisplay/IslandDisplay.gd" id="1_shiw0"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_a217a"]
+viewport_path = NodePath("SubViewport")
+
+[node name="IslandDisplay" type="Sprite3D" node_paths=PackedStringArray("raycast", "camera")]
+texture = SubResource("ViewportTexture_a217a")
+script = ExtResource("1_shiw0")
+raycast = NodePath("SubViewport/Camera3D/RayCast3D")
+camera = NodePath("SubViewport/Camera3D")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(1024, 768)
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 50, 0)
+fov = 24.0
+
+[node name="RayCast3D" type="RayCast3D" parent="SubViewport/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Camera3D"]

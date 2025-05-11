@@ -14,8 +14,8 @@ var selection_options = [
 	preload("res://SelectionOptions/Mission.gd").new(),
 ]
 
-func _init(file = null) -> void:
-	pass
+func _init(island_pos:Vector2, file = null) -> void:
+	self.island_pos = island_pos
 
 func icon_image() -> Texture2D:
 	return preload("res://MapIcon/facility.png")
