@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://2eaf8ryhkaej"]
+[gd_scene load_steps=15 format=3 uid="uid://2eaf8ryhkaej"]
 
 [ext_resource type="Script" uid="uid://sm8qvxdmrnm4" path="res://Room/Room.gd" id="1_wyylc"]
 [ext_resource type="PackedScene" uid="uid://dpbd6mk8pm80q" path="res://Room/Furniture/Monitor/Monitor.tscn" id="2_n4h2d"]
 [ext_resource type="PackedScene" uid="uid://b2iedvlngsahw" path="res://IslandDisplay/IslandDisplay.tscn" id="3_n4h2d"]
+[ext_resource type="PackedScene" uid="uid://cpiuuryn1hm0s" path="res://IslandDisplay/IslandDisplayController.tscn" id="4_5kue4"]
 [ext_resource type="PackedScene" uid="uid://8cqnfomn7a7w" path="res://Room/Furniture/Desk/desk.glb" id="4_gr7xt"]
 [ext_resource type="Texture2D" uid="uid://dfxmth3lg1qcf" path="res://icon.svg" id="4_n4h2d"]
 [ext_resource type="PackedScene" uid="uid://bigt2s6n38xrp" path="res://Room/Furniture/Room/room.glb" id="4_sko6s"]
@@ -49,6 +50,9 @@ transform = Transform3D(-0.23005, 0, -0.973179, 0, 1, 0, 0.973179, 0, -0.23005, 
 [node name="IslandDisplay" parent="Monitor" instance=ExtResource("3_n4h2d")]
 transform = Transform3D(-2.79397e-09, 0, -0.035, 0, 0.035, 0, 0.035, 0, -2.79397e-09, 0.218748, 0, 0.00108787)
 texture = SubResource("ViewportTexture_5kue4")
+
+[node name="IslandDisplayController" parent="Monitor" instance=ExtResource("4_5kue4")]
+transform = Transform3D(0.979987, 0, 0.19906, 0, 1, 0, -0.19906, 0, 0.979987, 0.379965, -0.168065, 0.0248024)
 
 [node name="Monitor2" parent="." instance=ExtResource("2_n4h2d")]
 transform = Transform3D(0.799821, 0, -0.600239, 0, 1, 0, 0.600239, 0, 0.799821, -0.580281, 0.970368, -0.446138)

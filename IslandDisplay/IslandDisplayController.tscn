@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpiuuryn1hm0s"]
+
+[ext_resource type="Script" uid="uid://d11xxdbgx7yjd" path="res://IslandDisplay/IslandDisplayController.gd" id="1_wokl2"]
+[ext_resource type="PackedScene" uid="uid://bniex35i0j5o6" path="res://IslandDisplayController/islandviewcontrolboard.glb" id="2_svwwr"]
+
+[node name="IslandDisplayController" type="Node3D" node_paths=PackedStringArray("joystick")]
+script = ExtResource("1_wokl2")
+joystick = NodePath("islandviewcontrolboard/Joystick")
+
+[node name="islandviewcontrolboard" parent="." instance=ExtResource("2_svwwr")]
+
+[node name="Joystick" parent="islandviewcontrolboard" index="1"]
+transform = Transform3D(0.0180422, 0.0416667, 0, -0.0104167, 0.0721688, 0, 0, 0, 0.0208333, 0.0102881, -0.0118956, -0.127315)
+
+[editable path="islandviewcontrolboard"]

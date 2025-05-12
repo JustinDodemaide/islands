@@ -1,4 +1,5 @@
 extends Sprite3D
+class_name IslandDisplay
 
 var enabled = false
 
@@ -146,7 +147,7 @@ func handle_camera(delta):
 		# Move left/right (x-axis)
 		if input_dir.x != 0:
 			var new_x = camera.position.x + input_dir.x * camera_speed * delta
-			camera.position.x = lerp(camera.position.x, clamp(new_x, left_bound, right_bound), 1)
+			camera.position.x = lerp(camera.position.x, float(clamp(new_x, left_bound, right_bound)), 1)
 
 var zoom = 0 # 0 is most zoomed out
 func zoom_out():
