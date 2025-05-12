@@ -1,8 +1,14 @@
 extends Node3D
 
-var enabled = false
+var enabled = true
 @export var joystick:MeshInstance3D
 @export var display:IslandDisplay
+
+func _on_room_camera_moved(setup: String) -> void:
+	if setup == "monitor1" or setup == "selection_apparatus":
+		enable()
+	else:
+		disable()
 
 func enable():
 	enabled = true
@@ -13,6 +19,7 @@ func disable():
 func _input(event: InputEvent) -> void:
 	if not enabled:
 		return
+	move_joystick("")
 	if event.is_action_pressed("W"):
 		move_joystick("forward")
 		return
@@ -25,17 +32,17 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("D"):
 		move_joystick("right")
 		return
-	move_joystick("")
 
 func move_joystick(direction):
+	var lerp_time = 1
 	match direction:
 		"forward":
-			joystick.rotation_degrees = Vector3(0,0,0)
+			joystick.rotation_degrees = lerp(joystick.rotation_degrees, Vector3(0,0,0), lerp_time)
 		"backward":
-			joystick.rotation_degrees = Vector3(0,0,-45)
+			joystick.rotation_degrees = lerp(joystick.rotation_degrees, Vector3(0,0,-45), lerp_time)
 		"left":
-			joystick.rotation_degrees = Vector3(21.6,-12.1,-30)
+			joystick.rotation_degrees = lerp(joystick.rotation_degrees, Vector3(22,-12,-30), lerp_time)
 		"right":
-			joystick.rotation_degrees = Vector3(-26.9,11.9,-30)
+			joystick.rotation_degrees = lerp(joystick.rotation_degrees, Vector3(-27,12,-30), lerp_time)
 		_:
-			joystick.rotation_degrees = Vector3(0,0,-30)
+			joystick.rotation_degrees = lerp(joystick.rotation_degrees, Vector3(0,0,-30), lerp_time)

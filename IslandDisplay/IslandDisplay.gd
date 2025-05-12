@@ -110,6 +110,7 @@ func facility_unhovered():
 
 #region Camera
 
+var receiving_input:bool = false
 @export var camera:Camera3D
 var camera_speed = 1000
 var upper_bound = -1
@@ -117,8 +118,14 @@ var lower_bound = 1
 var right_bound = 1
 var left_bound = -1
 
+func _on_room_camera_moved(setup: String) -> void:
+	if setup == "monitor1" or setup == "selection_apparatus":
+		receiving_input = true
+	else:
+		receiving_input = false
+
 func handle_camera(delta):
-	if $"../..".current_setup != "monitor1":
+	if not receiving_input:
 		return
 	
 	var input_dir = Vector2.ZERO
@@ -147,7 +154,7 @@ func handle_camera(delta):
 		# Move left/right (x-axis)
 		if input_dir.x != 0:
 			var new_x = camera.position.x + input_dir.x * camera_speed * delta
-			camera.position.x = lerp(camera.position.x, float(clamp(new_x, left_bound, right_bound)), 1)
+			camera.position.x = clamp(new_x, left_bound, right_bound)
 
 var zoom = 0 # 0 is most zoomed out
 func zoom_out():

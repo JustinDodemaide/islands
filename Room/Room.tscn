@@ -51,8 +51,9 @@ transform = Transform3D(-0.23005, 0, -0.973179, 0, 1, 0, 0.973179, 0, -0.23005, 
 transform = Transform3D(-2.79397e-09, 0, -0.035, 0, 0.035, 0, 0.035, 0, -2.79397e-09, 0.218748, 0, 0.00108787)
 texture = SubResource("ViewportTexture_5kue4")
 
-[node name="IslandDisplayController" parent="Monitor" instance=ExtResource("4_5kue4")]
+[node name="IslandDisplayController" parent="Monitor" node_paths=PackedStringArray("display") instance=ExtResource("4_5kue4")]
 transform = Transform3D(0.979987, 0, 0.19906, 0, 1, 0, -0.19906, 0, 0.979987, 0.379965, -0.168065, 0.0248024)
+display = NodePath("../IslandDisplay")
 
 [node name="Monitor2" parent="." instance=ExtResource("2_n4h2d")]
 transform = Transform3D(0.799821, 0, -0.600239, 0, 1, 0, 0.600239, 0, 0.799821, -0.580281, 0.970368, -0.446138)
@@ -87,3 +88,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.247175, 0.770966, -0.57472
 
 [node name="SelectionApparatus" parent="." instance=ExtResource("10_wyylc")]
 transform = Transform3D(0.465923, 0, -0.884825, 0, 1, 0, 0.884825, 0, 0.465923, -0.11017, 0.836075, -0.559843)
+
+[connection signal="room_camera_moved" from="." to="Monitor/IslandDisplay" method="_on_room_camera_moved"]
+[connection signal="room_camera_moved" from="." to="Monitor/IslandDisplayController" method="_on_room_camera_moved"]

@@ -1,6 +1,7 @@
 extends Node3D
 
 var game:Game
+signal room_camera_moved(setup:String)
 
 func game_done_initializing():
 	# activate the game display and island display
@@ -10,7 +11,7 @@ func game_done_initializing():
 @onready var camera = $Camera3D
 @export var initial_setup:String = "wide"
 var current_setup:String = initial_setup
-var setup_index:int = 1
+var setup_index:int = 0
 var setup_order = ["wide","monitor1","selection_apparatus"]
 
 const TRANSITION_TIME = 1.5
@@ -43,6 +44,7 @@ func move_camera(where:String) -> void:
 	var rot_tween = create_tween()
 	pos_tween.tween_property(camera,"position",CAMERA_POSITIONS[where],TRANSITION_TIME).set_trans(Tween.TRANS_CUBIC)
 	rot_tween.tween_property(camera,"rotation_degrees",CAMERA_ROTATIONS[where],TRANSITION_TIME).set_trans(Tween.TRANS_CUBIC)
+	emit_signal("room_camera_moved", where)
 
 func _input(event: InputEvent) -> void:
 	# Special cases
@@ -54,7 +56,8 @@ func _input(event: InputEvent) -> void:
 		setup_index = setup_order.find("monitor1")
 		move_camera("monitor1")
 		return
-		
+	
+	# main logic
 	if event.is_action_pressed("ui_up") and setup_index < setup_order.size() - 1:
 		setup_index += 1
 		move_camera(setup_order[setup_index])
