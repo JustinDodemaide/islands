@@ -112,11 +112,11 @@ func facility_unhovered():
 
 var receiving_input:bool = false
 @export var camera:Camera3D
-var camera_speed = 1000
-var upper_bound = -1
-var lower_bound = 1
-var right_bound = 1
-var left_bound = -1
+var camera_speed = 100
+var upper_bound = 100
+var lower_bound = -100
+var right_bound = 100
+var left_bound = -100
 
 func _on_room_camera_moved(setup: String) -> void:
 	if setup == "monitor1" or setup == "selection_apparatus":
@@ -151,9 +151,9 @@ func handle_camera(delta):
 			var new_z = camera.position.z + input_dir.y * camera_speed * delta
 			camera.position.z = clamp(new_z, lower_bound, upper_bound)
 		
-		# Move left/right (x-axis)
+		# Move left/right (x-axis) - FIX: negate the input_dir.x to correct the inversion
 		if input_dir.x != 0:
-			var new_x = camera.position.x + input_dir.x * camera_speed * delta
+			var new_x = camera.position.x + (-input_dir.x) * camera_speed * delta
 			camera.position.x = clamp(new_x, left_bound, right_bound)
 
 var zoom = 0 # 0 is most zoomed out
