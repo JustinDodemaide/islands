@@ -132,9 +132,9 @@ func handle_camera(delta):
 	
 	# Get input direction
 	if Input.is_action_pressed("S"):
-		input_dir.z += 1  # Down
+		input_dir.y += 1  # Down
 	if Input.is_action_pressed("W"):
-		input_dir.z -= 1  # Up
+		input_dir.y -= 1  # Up
 	if Input.is_action_pressed("A"):
 		input_dir.x -= 1  # Left
 	if Input.is_action_pressed("D"):
@@ -147,8 +147,8 @@ func handle_camera(delta):
 	# Apply movement
 	if input_dir != Vector2.ZERO:
 		# Move up/down (z-axis)
-		if input_dir.z != 0:
-			var new_z = camera.position.z + input_dir.z * camera_speed * delta
+		if input_dir.y != 0:
+			var new_z = camera.position.z + input_dir.y * camera_speed * delta
 			camera.position.z = clamp(new_z, lower_bound, upper_bound)
 		
 		# Move left/right (x-axis) - FIX: negate the input_dir.x to correct the inversion
