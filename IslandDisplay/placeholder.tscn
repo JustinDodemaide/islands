@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dswxqy37wy1nh"]
+
+[ext_resource type="Material" uid="uid://1v24bkre14o3" path="res://IslandDisplay/placeholder.tres" id="1_ie746"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_tooae"]
+size = Vector2(100, 100)
+
+[node name="MeshInstance3D" type="MeshInstance3D"]
+mesh = SubResource("PlaneMesh_tooae")
+surface_material_override/0 = ExtResource("1_ie746")

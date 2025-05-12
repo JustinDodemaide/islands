@@ -33,11 +33,11 @@ func turn_off():
 	$On_OffButton.get_surface_override_material(0).albedo_color = red
 	$On_OffButton.get_surface_override_material(0).emission = red
 	$On_OffButton/OmniLight3D.light_color = red
-	$Sprite3D.visible = false
+	$IslandDisplay.visible = false
 
 func turn_on():
 	on = true
 	$On_OffButton.get_surface_override_material(0).albedo_color = green
 	$On_OffButton.get_surface_override_material(0).emission = green
 	$On_OffButton/OmniLight3D.light_color = green
-	$Sprite3D.visible = true
+	$IslandDisplay.visible = true

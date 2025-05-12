@@ -8,7 +8,9 @@ func init(island:Island):
 	enable()
 
 func make_3d_model(island) -> MeshInstance3D:
-	var tile_to_feet_ratio = 1
+	#return load("res://IslandDisplay/placeholder.tscn").instantiate()
+	
+	var tile_to_feet_ratio = 12
 	# Create the mesh for the island
 	if island.tiles.is_empty():
 		return null
@@ -62,6 +64,8 @@ func make_3d_model(island) -> MeshInstance3D:
 	st.generate_normals()
 	mesh_instance.mesh = st.commit()
 	
+	mesh_instance.rotation_degrees = Vector3(90,0,0)
+	mesh_instance.position = Vector3(0,0,0)
 	return mesh_instance
 
 func enable():
