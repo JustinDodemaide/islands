@@ -1,6 +1,6 @@
 extends SelectionOption
 
-func text() -> String:
+func name() -> String:
 	return "Upgrade"
 
 func update_availability(facility:Facility) -> void:

@@ -3,10 +3,11 @@ extends Node3D
 var enabled:bool = false
 var option:SelectionOption
 
-func set_option(option:SelectionOption) -> void:
+func set_option(option:SelectionOption, disabled = false) -> void:
 	self.option = option
 	$Label3D.text = option.name()
-	enable()
+	if not disabled:
+		enable()
 
 func reset() -> void:
 	$Label3D.text = ""
@@ -61,6 +62,7 @@ func _unhovered():
 
 #endregion
 
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("LeftClick"):
 		if hovered:
@@ -71,8 +73,12 @@ func _input(event: InputEvent) -> void:
 var button_initial_pos = Vector3(0.063,0,0)
 var button_pressed_pos = Vector3(0.060,0,0)
 func press_button():
+	if not enabled:
+		return
 	var tween = create_tween()
 	tween.tween_property($button,"position",button_pressed_pos,0.1)
 	await tween.finished
 	var tween2 = create_tween()
 	tween2.tween_property($button,"position",button_initial_pos,0.1)
+	
+	option.selected(get_parent().facility)
