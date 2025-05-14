@@ -17,8 +17,8 @@ var selection_options = [
 func _init(island_pos:Vector2, file = null) -> void:
 	self.island_pos = island_pos
 
-func icon_image() -> Texture2D:
-	return preload("res://MapIcon/facility.png")
+func mesh() -> MeshInstance3D:
+	return null
 
 func get_selection_options() -> Array:
 	for option in selection_options:

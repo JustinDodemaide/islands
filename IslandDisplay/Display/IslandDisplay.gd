@@ -4,11 +4,16 @@ class_name IslandDisplay
 var enabled = false
 
 func init(island:Island):
-	var terrain_mesh = make_3d_model(island)
+	var terrain_mesh = _make_3d_model(island)
+	
 	$SubViewport.add_child(terrain_mesh)
 	enable()
 
-func make_3d_model(island) -> MeshInstance3D:
+func facilities(island) -> void:
+	for facility in island.facilities:
+		pass
+
+func _make_3d_model(island) -> MeshInstance3D:
 	#return load("res://IslandDisplay/placeholder.tscn").instantiate()
 	
 	var tile_to_feet_ratio = 12
@@ -85,29 +90,27 @@ func _process(delta: float) -> void:
 
 @export var raycast:RayCast3D
 @export var hover_indicator:Label3D
-var hovered_facility:Facility
+var hovered_icon:MapDisplayIcon
 func handle_raycast():
 	var collider = raycast.get_collider()
 	if collider == null:
-		hovered_facility = null
+		if hovered_icon == null:
+			return
+		hovered_icon = null
 		facility_unhovered()
-		return 
-	if collider.get_parent() == hovered_facility:
+		return
+	if collider.get_parent() == hovered_icon:
 		# only change things if a new facility is hovered over
 		# otherwise it'll do the same thing over and over
 		return
-	hovered_facility = collider.get_parent()
+	hovered_icon = collider.get_parent()
 	new_facility_hovered()
 
 func new_facility_hovered():
-	hover_indicator.visible = true
-	hover_indicator.position = hovered_facility.position
-	#hover_indicator.position.y = camera.position.y - 100
+	$SubViewport/CanvasLayer/Border.move_lines_to_margins()
 
 func facility_unhovered():
-	pass
-	#hover_indicator.visible = false
-
+	$SubViewport/CanvasLayer/Border.move_lines_to_edge()
 #region Camera
 
 var receiving_input:bool = false
@@ -118,6 +121,9 @@ var lower_bound = -100
 var right_bound = 100
 var left_bound = -100
 
+var zoom_levels = [100,200,300]
+var zoom_index = 0
+
 func _on_room_camera_moved(setup: String) -> void:
 	if setup == "monitor1" or setup == "selection_apparatus":
 		receiving_input = true
@@ -127,6 +133,17 @@ func _on_room_camera_moved(setup: String) -> void:
 func handle_camera(delta):
 	if not receiving_input:
 		return
+	
+	if Input.is_action_pressed("X"):
+		if zoom_index == 0:
+			return
+		zoom_index -= 1
+		camera.position.y = zoom_levels[zoom_index]
+	if Input.is_action_pressed("C"):
+		if zoom_index == zoom_levels.size() - 1:
+			return
+		zoom_index += 1
+		camera.position.y = zoom_levels[zoom_index]
 	
 	var input_dir = Vector2.ZERO
 	

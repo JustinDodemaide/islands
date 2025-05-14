@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cpiuuryn1hm0s"]
 
-[ext_resource type="Script" uid="uid://d11xxdbgx7yjd" path="res://IslandDisplay/IslandDisplayController.gd" id="1_wokl2"]
+[ext_resource type="Script" uid="uid://d11xxdbgx7yjd" path="res://IslandDisplay/Controller/IslandDisplayController.gd" id="1_wokl2"]
 [ext_resource type="PackedScene" uid="uid://bniex35i0j5o6" path="res://IslandDisplayController/islandviewcontrolboard.glb" id="2_svwwr"]
 
 [node name="IslandDisplayController" type="Node3D" node_paths=PackedStringArray("joystick")]

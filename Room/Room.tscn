@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://sm8qvxdmrnm4" path="res://Room/Room.gd" id="1_wyylc"]
 [ext_resource type="PackedScene" uid="uid://dpbd6mk8pm80q" path="res://Room/Furniture/Monitor/Monitor.tscn" id="2_n4h2d"]
-[ext_resource type="PackedScene" uid="uid://b2iedvlngsahw" path="res://IslandDisplay/IslandDisplay.tscn" id="3_n4h2d"]
-[ext_resource type="PackedScene" uid="uid://cpiuuryn1hm0s" path="res://IslandDisplay/IslandDisplayController.tscn" id="4_5kue4"]
+[ext_resource type="PackedScene" uid="uid://b2iedvlngsahw" path="res://IslandDisplay/Display/IslandDisplay.tscn" id="3_n4h2d"]
+[ext_resource type="PackedScene" uid="uid://cpiuuryn1hm0s" path="res://IslandDisplay/Controller/IslandDisplayController.tscn" id="4_5kue4"]
 [ext_resource type="PackedScene" uid="uid://8cqnfomn7a7w" path="res://Room/Furniture/Desk/desk.glb" id="4_gr7xt"]
 [ext_resource type="Texture2D" uid="uid://dfxmth3lg1qcf" path="res://icon.svg" id="4_n4h2d"]
 [ext_resource type="PackedScene" uid="uid://bigt2s6n38xrp" path="res://Room/Furniture/Room/room.glb" id="4_sko6s"]
