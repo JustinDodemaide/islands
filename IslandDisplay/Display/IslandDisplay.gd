@@ -85,13 +85,19 @@ func disabled():
 func _process(delta: float) -> void:
 	if not enabled:
 		return
-	handle_camera(delta)
-	handle_raycast()
+	_handle_camera(delta)
+	_handle_raycast()
 
 @export var raycast:RayCast3D
 @export var hover_indicator:Label3D
-var hovered_icon:MapDisplayIcon
-func handle_raycast():
+var hovered_icon:IslandDisplayIcon
+func _handle_raycast():
+	if Input.is_action_pressed("E"):
+		if hovered_icon:
+			_icon_selected()
+		else:
+			$SubViewport/CanvasLayer/Border.stop_tracking()
+	
 	var collider = raycast.get_collider()
 	if collider == null:
 		if hovered_icon == null:
@@ -111,6 +117,12 @@ func new_facility_hovered():
 
 func facility_unhovered():
 	$SubViewport/CanvasLayer/Border.move_lines_to_edge()
+
+signal icon_selected(icon:IslandDisplayIcon)
+func _icon_selected():
+	$SubViewport/CanvasLayer/Border.track(hovered_icon)
+	emit_signal("icon_selected",hovered_icon)
+
 #region Camera
 
 var receiving_input:bool = false
@@ -130,7 +142,7 @@ func _on_room_camera_moved(setup: String) -> void:
 	else:
 		receiving_input = false
 
-func handle_camera(delta):
+func _handle_camera(delta):
 	if not receiving_input:
 		return
 	
@@ -174,6 +186,6 @@ func handle_camera(delta):
 			camera.position.x = clamp(new_x, left_bound, right_bound)
 
 var zoom = 0 # 0 is most zoomed out
-func zoom_out():
+func _zoom_out():
 	pass
 #endregion

@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://cqpmu7w1wvmtb"]
+[gd_scene load_steps=3 format=3 uid="uid://cqpmu7w1wvmtb"]
 
 [ext_resource type="PackedScene" uid="uid://dstm37ja4g27k" path="res://Room/Furniture/SelectionAparatus/AppartusUnit/SelectionAparatusUnit.tscn" id="1_bmqf2"]
+[ext_resource type="Script" uid="uid://cut1nwjchviti" path="res://Room/Furniture/SelectionAparatus/SelectionApparatus.gd" id="1_ywk02"]
 
 [node name="SelectionApparatus" type="Node3D"]
+script = ExtResource("1_ywk02")
 
 [node name="SelectionAparatusUnit" parent="." instance=ExtResource("1_bmqf2")]
 

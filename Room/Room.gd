@@ -67,3 +67,10 @@ func _input(event: InputEvent) -> void:
 		
 	if event.is_action_pressed("E"):
 		pass
+
+
+func _on_island_display_icon_selected(icon: IslandDisplayIcon) -> void:
+	# Change view
+	# Load options
+	move_camera("selection_apparatus")
+	$SelectionApparatus.set_options(icon.facility)

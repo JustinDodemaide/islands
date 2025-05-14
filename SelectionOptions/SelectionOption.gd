@@ -2,8 +2,11 @@ class_name SelectionOption
 
 var enabled:bool = true
 
-func text() -> String:
+func name() -> String:
 	return "Option"
+
+func description() -> String:
+	return "This is an option!"
 
 func update_availability(facility:Facility) -> void:
 	pass
