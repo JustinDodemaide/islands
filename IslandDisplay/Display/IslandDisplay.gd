@@ -97,6 +97,7 @@ func _handle_raycast():
 			_icon_selected()
 		else:
 			$SubViewport/CanvasLayer/Border.stop_tracking()
+			emit_signal("icon_deselected")
 	
 	var collider = raycast.get_collider()
 	if collider == null:
@@ -119,8 +120,10 @@ func facility_unhovered():
 	$SubViewport/CanvasLayer/Border.move_lines_to_edge()
 
 signal icon_selected(icon:IslandDisplayIcon)
+signal icon_deselected()
 func _icon_selected():
 	$SubViewport/CanvasLayer/Border.track(hovered_icon)
+	print("selected")
 	emit_signal("icon_selected",hovered_icon)
 
 #region Camera

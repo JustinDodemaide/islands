@@ -7,3 +7,7 @@ func set_options(facility:Facility):
 	for option:SelectionOption in facility.selection_options:
 		children[child_index].set_option(option)
 		child_index += 1
+
+func clear():
+	for child in get_children():
+		child.reset()

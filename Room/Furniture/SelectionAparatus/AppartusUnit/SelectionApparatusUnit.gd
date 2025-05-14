@@ -1,43 +1,45 @@
 extends Node3D
 
+var enabled:bool = false
 var option:SelectionOption
-
-func _ready() -> void:
-	# changing the emission of one changes the emission of all, so we need to make it unique
-	pass
-	#$option_button/Cube.mesh = $option_button/Cube.mesh.duplicate()
-	$ApparatusUnitButton/Cube.mesh.surface_set_material(1, $ApparatusUnitButton/Cube.mesh.surface_get_material(1).duplicate())
 
 func set_option(option:SelectionOption) -> void:
 	self.option = option
 	$Label3D.text = option.name()
 	enable()
 
-func remove_option() -> void:
+func reset() -> void:
+	$Label3D.text = ""
 	self.option = null
 	disable()
 
 func enable():
+	enabled = true
 	$button/Area3D/CollisionShape3D.disabled = false
 	var display_material = $ApparatusUnitButton/Cube.mesh.surface_get_material(1)
-	var emission_multiplier = 5.0
+	var emission_multiplier = 2.5
 	var tween = create_tween()
-	tween.tween_property(display_material,"emission_energy_multiplier",emission_multiplier,2).set_trans(Tween.TRANS_BOUNCE)
+	tween.tween_property(display_material,"emission_energy_multiplier",emission_multiplier,1).set_trans(Tween.TRANS_CUBIC)
 
 func disable():
+	enabled = false
 	$button/Area3D/CollisionShape3D.disabled = true
-	var display_material = $option_button/Cube.mesh.surface_get_material(1)
+	var display_material = $ApparatusUnitButton/Cube.mesh.surface_get_material(1)
 	var tween = create_tween()
-	tween.tween_property(display_material,"emission_energy_multiplier",1.0,2).set_trans(Tween.TRANS_BOUNCE)
+	tween.tween_property(display_material,"emission_energy_multiplier",0.0,1).set_trans(Tween.TRANS_CUBIC)
 
 #region HOVER
 var hovered:bool = false
 const LIGHT_ENERGY = 0.1
 func _on_area_3d_mouse_entered() -> void:
+	if not enabled:
+		return
 	hovered = true
 	_hovered()
 
 func _on_area_3d_mouse_exited() -> void:
+	if not enabled:
+		return
 	hovered = false
 	_unhovered()
 
@@ -51,10 +53,12 @@ func _hovered():
 
 func _unhovered():
 	hovered = false
-	$OmniLight3D.visible = false
 	var tween = create_tween()
 	var time = 0.5
 	tween.tween_property($OmniLight3D, "light_energy", 0.0, time)
+	await tween.finished
+	$OmniLight3D.visible = false
+
 #endregion
 
 func _input(event: InputEvent) -> void:

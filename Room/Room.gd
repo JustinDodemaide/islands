@@ -74,3 +74,6 @@ func _on_island_display_icon_selected(icon: IslandDisplayIcon) -> void:
 	# Load options
 	move_camera("selection_apparatus")
 	$SelectionApparatus.set_options(icon.facility)
+
+func _on_island_display_icon_deselected() -> void:
+	$SelectionApparatus.clear()
