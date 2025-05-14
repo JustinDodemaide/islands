@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://dstm37ja4g27k"]
+
+[ext_resource type="Script" uid="uid://bd0bhm7lrgmfw" path="res://Room/Furniture/SelectionAparatus/AppartusUnit/SelectionApparatusUnit.gd" id="1_2nbs1"]
+[ext_resource type="PackedScene" uid="uid://c380qrmlg6w6h" path="res://Room/Furniture/SelectionAparatus/AppartusUnit/ApparatusUnitButton.glb" id="2_mi46t"]
+[ext_resource type="PackedScene" uid="uid://cedmvjuye8l4o" path="res://Room/Furniture/SelectionAparatus/AppartusUnit/button.glb" id="3_vifdi"]
+[ext_resource type="FontFile" uid="uid://cix7r24147sx8" path="res://Fonts/battlenet.ttf" id="4_7w7b6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q46y3"]
+size = Vector3(0.01, 0.025, 0.1)
+
+[node name="SelectionAparatusUnit" type="Node3D"]
+script = ExtResource("1_2nbs1")
+
+[node name="ApparatusUnitButton" parent="." instance=ExtResource("2_mi46t")]
+
+[node name="button" parent="." instance=ExtResource("3_vifdi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.063, 0, 0)
+
+[node name="Area3D" type="Area3D" parent="button"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00169004, 0, 0)
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="button/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0428223)
+shape = SubResource("BoxShape3D_q46y3")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(-6.99382e-09, 0, 0.16, 0, 0.16, 0, -0.16, 0, -6.99382e-09, 0.0622469, 0, -0.0587078)
+shaded = true
+texture_filter = 0
+font = ExtResource("4_7w7b6")
+outline_size = 0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0734415, 0, 0)
+visible = false
+light_color = Color(0.968627, 0.462745, 0.133333, 1)
+light_energy = 0.0
+shadow_enabled = true
+omni_range = 0.1
+
+[connection signal="mouse_entered" from="button/Area3D" to="." method="_on_area_3d_mouse_entered"]
+[connection signal="mouse_exited" from="button/Area3D" to="." method="_on_area_3d_mouse_exited"]
+
+[editable path="ApparatusUnitButton"]

@@ -72,3 +72,7 @@ C={
 [layer_names]
 
 3d_physics/layer_2="facility"
+
+[physics]
+
+3d/physics_engine="Jolt Physics"

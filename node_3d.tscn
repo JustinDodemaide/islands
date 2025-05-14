@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://pvqv77svp183"]
+
+[ext_resource type="PackedScene" uid="uid://cqpmu7w1wvmtb" path="res://Room/Furniture/SelectionAparatus/SelectionApparatus.tscn" id="1_a202f"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="SelectionApparatus" parent="." instance=ExtResource("1_a202f")]
