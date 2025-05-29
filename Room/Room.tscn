@@ -28,7 +28,7 @@ visible = false
 mesh = SubResource("BoxMesh_sko6s")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.999575, 0, -0.0291429, 0, 1, 0, 0.0291429, 0, 0.999575, 0.164083, 0.92822, -0.19907)
+transform = Transform3D(0.97413, 0, -0.225988, 0, 1, 0, 0.225988, 0, 0.97413, 0.161779, 1.2829, -0.167021)
 fov = 50.0
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
@@ -58,8 +58,7 @@ transform = Transform3D(0.979987, 0, 0.19906, 0, 1, 0, -0.19906, 0, 0.979987, 0.
 display = NodePath("../IslandDisplay")
 
 [node name="IslandInfoMonitor" parent="." instance=ExtResource("5_lcoht")]
-transform = Transform3D(-0.138914, 0, -0.990304, 0, 1, 0, 0.990304, 0, -0.138914, 0.226091, 0.994542, -0.730837)
-visible = false
+transform = Transform3D(-0.225852, 0, -0.974161, 0, 1, 0, 0.974161, 0, -0.225852, 0.283283, 1.31058, -0.730837)
 
 [node name="Monitor2" parent="." instance=ExtResource("2_n4h2d")]
 transform = Transform3D(0.799821, 0, -0.600239, 0, 1, 0, 0.600239, 0, 0.799821, -0.693841, 0.937719, -0.509068)
