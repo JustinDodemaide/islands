@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://b7aii3nmx7j7b"]
+
+[ext_resource type="PackedScene" uid="uid://ddamrtusv1jg5" path="res://ClickableArea3D/ClickableArea3D.tscn" id="1_g12y4"]
+[ext_resource type="Script" uid="uid://drhpg6q0w6dma" path="res://IslandInformationMonitor/Buttons/forward_backward.gd" id="1_i4goe"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_vkgf0"]
+resource_local_to_scene = true
+size = Vector3(0.025, 0.025, 0.025)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yrdeg"]
+albedo_color = Color(0.0980392, 0.235294, 0.243137, 1)
+emission_enabled = true
+emission = Color(0.0980392, 0.235294, 0.243137, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j5cth"]
+size = Vector3(0.025, 0.025, 0.025)
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_i4goe")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_vkgf0")
+surface_material_override/0 = SubResource("StandardMaterial3D_yrdeg")
+
+[node name="ClickableArea3D" parent="." instance=ExtResource("1_g12y4")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ClickableArea3D"]
+shape = SubResource("BoxShape3D_j5cth")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.012, 0, 0)
+
+[connection signal="hovered" from="ClickableArea3D" to="." method="_on_clickable_area_3d_hovered"]
+[connection signal="pressed" from="ClickableArea3D" to="." method="_on_clickable_area_3d_pressed"]
+[connection signal="unhovered" from="ClickableArea3D" to="." method="_on_clickable_area_3d_unhovered"]

@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://cahttr577nhiy"]
+
+[ext_resource type="Script" uid="uid://p0ogvfn43dkm" path="res://IslandInformationMonitor/IslandInfoMonitor.gd" id="1_7u01p"]
+[ext_resource type="PackedScene" uid="uid://cpkkkljmrnxvx" path="res://Room/Furniture/Monitor/mesh/new.glb" id="1_12nnb"]
+[ext_resource type="PackedScene" uid="uid://55we8767wp33" path="res://IslandInformationMonitor/IslandInformationDisplay/IslandInformationDisplay.tscn" id="2_rxuh7"]
+[ext_resource type="PackedScene" uid="uid://b7aii3nmx7j7b" path="res://IslandInformationMonitor/Buttons/ForwardBackward.tscn" id="4_03751"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_7u01p"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="BoxMesh" id="BoxMesh_7u01p"]
+resource_local_to_scene = true
+size = Vector3(0.025, 0.025, 0.025)
+
+[sub_resource type="BoxMesh" id="BoxMesh_03751"]
+resource_local_to_scene = true
+size = Vector3(0.025, 0.025, 0.025)
+
+[node name="IslandInfoMonitor" type="Node3D"]
+script = ExtResource("1_7u01p")
+
+[node name="new" parent="." instance=ExtResource("1_12nnb")]
+
+[node name="IslandInformationDisplay" parent="." instance=ExtResource("2_rxuh7")]
+transform = Transform3D(-1.57361e-09, 0, 0.036, 0, 0.036, 0, -0.036, 0, -1.57361e-09, 0.216749, 0, 0)
+texture = SubResource("ViewportTexture_7u01p")
+
+[node name="Backward" parent="." instance=ExtResource("4_03751")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.240723, -0.171521, 0.138993)
+
+[node name="MeshInstance3D" parent="Backward" index="0"]
+mesh = SubResource("BoxMesh_7u01p")
+
+[node name="Forward" parent="." instance=ExtResource("4_03751")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.240723, -0.17098, 0.0378205)
+
+[node name="MeshInstance3D" parent="Forward" index="0"]
+mesh = SubResource("BoxMesh_03751")
+
+[connection signal="pressed" from="Backward/ClickableArea3D" to="." method="_on_backward_pressed"]
+[connection signal="pressed" from="Forward/ClickableArea3D" to="." method="_on_forward_pressed"]
+
+[editable path="Backward"]
+[editable path="Forward"]

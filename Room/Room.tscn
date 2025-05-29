@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://2eaf8ryhkaej"]
+[gd_scene load_steps=16 format=3 uid="uid://2eaf8ryhkaej"]
 
 [ext_resource type="Script" uid="uid://sm8qvxdmrnm4" path="res://Room/Room.gd" id="1_wyylc"]
 [ext_resource type="PackedScene" uid="uid://dpbd6mk8pm80q" path="res://Room/Furniture/Monitor/Monitor.tscn" id="2_n4h2d"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://8cqnfomn7a7w" path="res://Room/Furniture/Desk/desk.glb" id="4_gr7xt"]
 [ext_resource type="Texture2D" uid="uid://dfxmth3lg1qcf" path="res://icon.svg" id="4_n4h2d"]
 [ext_resource type="PackedScene" uid="uid://bigt2s6n38xrp" path="res://Room/Furniture/Room/room.glb" id="4_sko6s"]
+[ext_resource type="PackedScene" uid="uid://cahttr577nhiy" path="res://IslandInformationMonitor/IslandInfoMonitor.tscn" id="5_lcoht"]
 [ext_resource type="PackedScene" uid="uid://dyrbwgxq3xlyv" path="res://Room/Furniture/Frame/frame.glb" id="5_sko6s"]
 [ext_resource type="PackedScene" uid="uid://b4e2r1sph8523" path="res://Room/Furniture/Lamp/lamp.glb" id="6_soc6w"]
 [ext_resource type="PackedScene" uid="uid://cfbnx08pjdta" path="res://Room/Furniture/Computer/computer.glb" id="7_2qh2i"]
@@ -15,7 +16,7 @@
 
 [sub_resource type="BoxMesh" id="BoxMesh_sko6s"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_5kue4"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_lcoht"]
 viewport_path = NodePath("SubViewport")
 
 [node name="Room" type="Node3D"]
@@ -46,14 +47,18 @@ shadow_enabled = true
 
 [node name="Monitor" parent="." instance=ExtResource("2_n4h2d")]
 transform = Transform3D(-0.23005, 0, -0.973179, 0, 1, 0, 0.973179, 0, -0.23005, 0.287, 0.93, -0.708)
+visible = false
 
 [node name="IslandDisplay" parent="Monitor" instance=ExtResource("3_n4h2d")]
 transform = Transform3D(-1.57361e-09, 0, -0.036, 0, 0.036, 0, 0.036, 0, -1.57361e-09, 0.218748, 0, 0.00108787)
-texture = SubResource("ViewportTexture_5kue4")
+texture = SubResource("ViewportTexture_lcoht")
 
 [node name="IslandDisplayController" parent="Monitor" node_paths=PackedStringArray("display") instance=ExtResource("4_5kue4")]
 transform = Transform3D(0.979987, 0, 0.19906, 0, 1, 0, -0.19906, 0, 0.979987, 0.379965, -0.168065, 0.0248024)
 display = NodePath("../IslandDisplay")
+
+[node name="IslandInfoMonitor" parent="." instance=ExtResource("5_lcoht")]
+transform = Transform3D(-0.138914, 0, -0.990304, 0, 1, 0, 0.990304, 0, -0.138914, 0.226091, 0.994542, -0.730837)
 
 [node name="Monitor2" parent="." instance=ExtResource("2_n4h2d")]
 transform = Transform3D(0.799821, 0, -0.600239, 0, 1, 0, 0.600239, 0, 0.799821, -0.693841, 0.937719, -0.509068)

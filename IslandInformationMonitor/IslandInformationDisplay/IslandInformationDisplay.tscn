@@ -1,0 +1,28 @@
+[gd_scene load_steps=7 format=3 uid="uid://55we8767wp33"]
+
+[ext_resource type="Script" uid="uid://dbiv1564vaauh" path="res://IslandInformationMonitor/IslandInformationDisplay/IslandInformationDisplay.gd" id="1_8flcf"]
+[ext_resource type="PackedScene" uid="uid://dr0fjodf7516o" path="res://IslandInformationMonitor/IslandInformationDisplay/Views/IslandInfo/IslandInfo.tscn" id="2_8x4et"]
+[ext_resource type="PackedScene" uid="uid://cjrmv1i0qq8ry" path="res://IslandInformationMonitor/IslandInformationDisplay/Views/FacilityOverview/FacilityOverview.tscn" id="3_iprmp"]
+[ext_resource type="PackedScene" uid="uid://cirauvybkx6d6" path="res://IslandInformationMonitor/IslandInformationDisplay/Views/FacilityProduction/FacilityProduction.tscn" id="4_6h27t"]
+[ext_resource type="PackedScene" uid="uid://c47j8qag0c8x2" path="res://IslandInformationMonitor/IslandInformationDisplay/Views/FacilityMission/FacilityMission.tscn" id="5_0qrrp"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_qdpsx"]
+viewport_path = NodePath("SubViewport")
+
+[node name="IslandInformationDisplay" type="Sprite3D" node_paths=PackedStringArray("initial_state")]
+texture_filter = 0
+texture = SubResource("ViewportTexture_qdpsx")
+script = ExtResource("1_8flcf")
+initial_state = NodePath("SubViewport/IslandInfo")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+canvas_item_default_texture_filter = 0
+size = Vector2i(1024, 768)
+
+[node name="IslandInfo" parent="SubViewport" instance=ExtResource("2_8x4et")]
+
+[node name="FacilityOverview" parent="SubViewport" instance=ExtResource("3_iprmp")]
+
+[node name="FacilityProduction" parent="SubViewport" instance=ExtResource("4_6h27t")]
+
+[node name="FacilityMission" parent="SubViewport" instance=ExtResource("5_0qrrp")]

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddamrtusv1jg5"]
+
+[ext_resource type="Script" uid="uid://bm544auoxl77" path="res://ClickableArea3D/ClickableArea3D.gd" id="1_7n8kf"]
+
+[node name="ClickableArea3D" type="Area3D"]
+monitoring = false
+monitorable = false
+script = ExtResource("1_7n8kf")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
