@@ -6,13 +6,11 @@ signal room_camera_moved(setup:String)
 func game_done_initializing():
 	# activate the game display and island display
 	game = get_parent()
-	$Monitor/IslandDisplay.init(game.active_island)
+	#$Monitor/IslandDisplay.init(game.active_island)
 
 @onready var camera = $Camera3D
 @export var initial_setup:String = "wide"
 var current_setup:String = initial_setup
-var setup_index:int = 0
-var setup_order = ["wide","monitor1","selection_apparatus"]
 
 var setups = {
 	"wide":{
@@ -59,21 +57,9 @@ var setups = {
 
 const TRANSITION_TIME = 1.5
 
-const CAMERA_POSITIONS = {
-	"wide":Vector3(0.035,1.1,0.5),
-	"monitor1":Vector3(0.164,0.928,-0.199),
-	"selection_apparatus":Vector3(0.164,0.928,-0.199),
-}
-
-const CAMERA_ROTATIONS = {
-	"wide":Vector3(-10,0.0,0.0),
-	"monitor1":Vector3(0.0,-13.4,0.0),
-	"selection_apparatus":Vector3(0.0,-1.7,0.0),
-}
-
 func _ready() -> void:
-	camera.position = CAMERA_POSITIONS[initial_setup]
-	camera.rotation_degrees = CAMERA_ROTATIONS[initial_setup]
+	camera.position = setups[initial_setup]["pos"]
+	camera.rotation_degrees = setups[initial_setup]["rot"]
 
 func move_camera(where:String) -> void:
 	if !setups.has(where):

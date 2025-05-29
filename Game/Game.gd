@@ -15,7 +15,16 @@ class_name Game
 var islands = []
 var active_island: Island
 
+var resource_amounts = {
+	"electricity":0,
+}
+
+var resource_production = {
+	"electricity":1,
+}
+
 func _ready() -> void:
+	SignalBus.game = self
 	_new()
 
 func _new():
@@ -27,6 +36,7 @@ func _new():
 		island.new()
 		islands.append(island)
 	active_island = islands.front()
+	add_child(load("res://Room/Room.tscn").instantiate())
 	$Room.game_done_initializing()
 
 func from_file(file):

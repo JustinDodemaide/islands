@@ -1,14 +1,8 @@
 extends Node3D
 
-var enabled = true
+var enabled = false
 @export var joystick:MeshInstance3D
 @export var display:IslandDisplay
-
-func _on_room_camera_moved(setup: String) -> void:
-	if setup == "monitor1" or setup == "selection_apparatus":
-		enable()
-	else:
-		disable()
 
 func enable():
 	enabled = true

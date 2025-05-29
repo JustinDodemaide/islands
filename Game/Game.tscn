@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://ci0fyadtl32hg"]
+[gd_scene load_steps=6 format=3 uid="uid://ci0fyadtl32hg"]
 
 [ext_resource type="Script" uid="uid://bjqbrkkpjog0d" path="res://Game/Game.gd" id="1_hqwdr"]
-[ext_resource type="PackedScene" uid="uid://2eaf8ryhkaej" path="res://Room/Room.tscn" id="2_vrr3t"]
 [ext_resource type="Texture2D" uid="uid://b6ap0gnm5tdpv" path="res://Skybox/AllSkyFree_Sky_ClearBlueSky_Equirect.png" id="4_37esa"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_37esa"]
@@ -19,8 +18,6 @@ ambient_light_source = 3
 script = ExtResource("1_hqwdr")
 
 [node name="UpdateTimer" type="Timer" parent="."]
-
-[node name="Room" parent="." instance=ExtResource("2_vrr3t")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_fuqhk")

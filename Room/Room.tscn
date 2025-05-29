@@ -1,9 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://2eaf8ryhkaej"]
+[gd_scene load_steps=14 format=3 uid="uid://2eaf8ryhkaej"]
 
 [ext_resource type="Script" uid="uid://sm8qvxdmrnm4" path="res://Room/Room.gd" id="1_wyylc"]
+[ext_resource type="PackedScene" uid="uid://dex7h4eg5vftg" path="res://IslandMonitor/IslandMonitor.tscn" id="2_5kue4"]
 [ext_resource type="PackedScene" uid="uid://dpbd6mk8pm80q" path="res://Room/Furniture/Monitor/Monitor.tscn" id="2_n4h2d"]
-[ext_resource type="PackedScene" uid="uid://b2iedvlngsahw" path="res://IslandDisplay/Display/IslandDisplay.tscn" id="3_n4h2d"]
-[ext_resource type="PackedScene" uid="uid://cpiuuryn1hm0s" path="res://IslandDisplay/Controller/IslandDisplayController.tscn" id="4_5kue4"]
 [ext_resource type="PackedScene" uid="uid://8cqnfomn7a7w" path="res://Room/Furniture/Desk/desk.glb" id="4_gr7xt"]
 [ext_resource type="Texture2D" uid="uid://dfxmth3lg1qcf" path="res://icon.svg" id="4_n4h2d"]
 [ext_resource type="PackedScene" uid="uid://bigt2s6n38xrp" path="res://Room/Furniture/Room/room.glb" id="4_sko6s"]
@@ -15,9 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://cqpmu7w1wvmtb" path="res://Room/Furniture/SelectionAparatus/SelectionApparatus.tscn" id="12_5kue4"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_sko6s"]
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_lcoht"]
-viewport_path = NodePath("SubViewport")
 
 [node name="Room" type="Node3D"]
 script = ExtResource("1_wyylc")
@@ -45,17 +41,8 @@ light_color = Color(0.964706, 0.803922, 0.545098, 1)
 light_energy = 0.5
 shadow_enabled = true
 
-[node name="Monitor" parent="." instance=ExtResource("2_n4h2d")]
+[node name="IslandMonitor" parent="." instance=ExtResource("2_5kue4")]
 transform = Transform3D(-0.23005, 0, -0.973179, 0, 1, 0, 0.973179, 0, -0.23005, 0.287, 0.93, -0.708)
-
-[node name="IslandDisplay" parent="Monitor" instance=ExtResource("3_n4h2d")]
-transform = Transform3D(-1.57361e-09, 0, -0.036, 0, 0.036, 0, 0.036, 0, -1.57361e-09, 0.218748, 0, 0.00108787)
-texture_filter = 0
-texture = SubResource("ViewportTexture_lcoht")
-
-[node name="IslandDisplayController" parent="Monitor" node_paths=PackedStringArray("display") instance=ExtResource("4_5kue4")]
-transform = Transform3D(0.979987, 0, 0.19906, 0, 1, 0, -0.19906, 0, 0.979987, 0.379965, -0.168065, 0.0248024)
-display = NodePath("../IslandDisplay")
 
 [node name="IslandInfoMonitor" parent="." instance=ExtResource("5_lcoht")]
 transform = Transform3D(-0.225852, 0, -0.974161, 0, 1, 0, 0.974161, 0, -0.225852, 0.283283, 1.31058, -0.730837)
@@ -94,7 +81,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.247175, 0.770966, -0.57472
 [node name="SelectionApparatus" parent="." instance=ExtResource("12_5kue4")]
 transform = Transform3D(0.0920403, 0, -0.995755, 0, 1, 0, 0.995755, 0, 0.0920403, -0.0997867, 0.836657, -0.586769)
 
-[connection signal="room_camera_moved" from="." to="Monitor/IslandDisplay" method="_on_room_camera_moved"]
-[connection signal="room_camera_moved" from="." to="Monitor/IslandDisplayController" method="_on_room_camera_moved"]
-[connection signal="icon_deselected" from="Monitor/IslandDisplay" to="." method="_on_island_display_icon_deselected"]
-[connection signal="icon_selected" from="Monitor/IslandDisplay" to="." method="_on_island_display_icon_selected"]
+[connection signal="room_camera_moved" from="." to="IslandMonitor" method="_on_room_camera_moved"]

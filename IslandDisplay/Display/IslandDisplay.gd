@@ -1,7 +1,7 @@
 extends Sprite3D
 class_name IslandDisplay
 
-var enabled = false
+var enabled = true
 
 func init(island:Island):
 	var terrain_mesh = _make_3d_model(island)
@@ -78,7 +78,7 @@ func enable():
 	enabled = true
 	visible = true
 
-func disabled():
+func disable():
 	enabled = false
 	visible = false
 
@@ -138,12 +138,6 @@ var left_bound = -100
 
 var zoom_levels = [100,200,300]
 var zoom_index = 0
-
-func _on_room_camera_moved(setup: String) -> void:
-	if setup == "monitor1" or setup == "selection_apparatus":
-		receiving_input = true
-	else:
-		receiving_input = false
 
 func _handle_camera(delta):
 	if not receiving_input:
