@@ -32,5 +32,6 @@ func _on_mouse_exited() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("LeftClick"):
-		if hovered:
+		#get_viewport().set_input_as_handled()
+		if is_hovered:
 			emit_signal("pressed")

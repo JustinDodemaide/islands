@@ -47,7 +47,6 @@ shadow_enabled = true
 
 [node name="Monitor" parent="." instance=ExtResource("2_n4h2d")]
 transform = Transform3D(-0.23005, 0, -0.973179, 0, 1, 0, 0.973179, 0, -0.23005, 0.287, 0.93, -0.708)
-visible = false
 
 [node name="IslandDisplay" parent="Monitor" instance=ExtResource("3_n4h2d")]
 transform = Transform3D(-1.57361e-09, 0, -0.036, 0, 0.036, 0, 0.036, 0, -1.57361e-09, 0.218748, 0, 0.00108787)
@@ -59,6 +58,7 @@ display = NodePath("../IslandDisplay")
 
 [node name="IslandInfoMonitor" parent="." instance=ExtResource("5_lcoht")]
 transform = Transform3D(-0.138914, 0, -0.990304, 0, 1, 0, 0.990304, 0, -0.138914, 0.226091, 0.994542, -0.730837)
+visible = false
 
 [node name="Monitor2" parent="." instance=ExtResource("2_n4h2d")]
 transform = Transform3D(0.799821, 0, -0.600239, 0, 1, 0, 0.600239, 0, 0.799821, -0.693841, 0.937719, -0.509068)

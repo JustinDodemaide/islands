@@ -4,18 +4,24 @@ var enabled = true
 var default_emission_energy = 1
 
 func enable():
+	enabled = true
 	var tween = create_tween()
 	tween.tween_property($MeshInstance3D.get_surface_override_material(0),"emission_energy_multiplier", default_emission_energy, 0.25)
 
 func disable():
+	enabled = false
 	var tween = create_tween()
 	tween.tween_property($MeshInstance3D.get_surface_override_material(0),"emission_energy_multiplier",0, 0.25)
 
 func _on_clickable_area_3d_hovered() -> void:
+	if not enabled:
+		return
 	var tween = create_tween()
 	tween.tween_property($MeshInstance3D.get_surface_override_material(0),"emission_energy_multiplier",5, 0.25)
 
 func _on_clickable_area_3d_unhovered() -> void:
+	if not enabled:
+		return
 	var tween = create_tween()
 	tween.tween_property($MeshInstance3D.get_surface_override_material(0),"emission_energy_multiplier", default_emission_energy, 0.25)
 
