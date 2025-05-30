@@ -1,6 +1,8 @@
 extends Node3D
 class_name Facility
 
+var id:String
+
 var occupied_by:Faction = Faction.new()
 
 var island_pos:Vector2 = Vector2.ZERO
@@ -14,8 +16,12 @@ var selection_options = [
 	preload("res://SelectionOptions/Mission.gd").new(),
 ]
 
-func _init(island_pos:Vector2, file = null) -> void:
+func new(pos:Vector2):
+	id = str(randi())
 	self.island_pos = island_pos
+
+func from_file(id:String):
+	pass
 
 func name() -> String:
 	return "Facility"

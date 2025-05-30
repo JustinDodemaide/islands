@@ -1,12 +1,15 @@
 extends Node3D
 class_name Island
 
+var id:String
+
 var HEIGHT = 100
 var WIDTH = 100
 var tiles = {}
-var facilities = []
+var facilities:Array[Facility] = []
 
 func new():
+	id = str(randi())
 	_generate()
 
 func from_file(file = null):
@@ -41,3 +44,18 @@ func _generate():
 		var tile = tiles.keys().pick_random()
 		var facility = load("res://Facility/Facility.gd").new(tile)
 		facilities.append(facility)
+
+func save() -> void:
+	var island_save_file = FileAccess.open("user://Islands" + id + ".save", FileAccess.WRITE)
+	# tiles
+	island_save_file.store_line(JSON.stringify(tiles))
+	# facilities
+	var facility_ids = []
+	for facility in facilities:
+		facility_ids.append(facility.id)
+		facility.save()
+	island_save_file.store_line(JSON.stringify(facility_ids))
+
+func load_from_id(id:String) -> void:
+	self.id = id
+	var island_save_file = FileAccess.open("user://Islands" + id + ".save", FileAccess.READ)
