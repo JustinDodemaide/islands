@@ -114,17 +114,23 @@ func _handle_raycast():
 	new_facility_hovered()
 
 func new_facility_hovered():
+	print("hovered")
 	$SubViewport/CanvasLayer/Border.move_lines_to_margins()
 
 func facility_unhovered():
+	print("unhovered")
 	$SubViewport/CanvasLayer/Border.move_lines_to_edge()
 
 signal icon_selected(icon:IslandDisplayIcon)
 signal icon_deselected()
 func _icon_selected():
+	if not $SelectionDebounce.is_stopped():
+		return
 	$SubViewport/CanvasLayer/Border.track(hovered_icon)
-	print("selected")
+	#print("selected")
 	emit_signal("icon_selected",hovered_icon)
+	SignalBus.emit_signal("facility_selected",hovered_icon.facility)
+	$SelectionDebounce.start(1)
 
 #region Camera
 

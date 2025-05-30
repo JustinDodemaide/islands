@@ -55,7 +55,7 @@ var setups = {
 	}
 }
 
-const TRANSITION_TIME = 1.5
+@export var transition_time = 1.0
 
 func _ready() -> void:
 	camera.position = setups[initial_setup]["pos"]
@@ -67,8 +67,8 @@ func move_camera(where:String) -> void:
 	current_setup = where
 	var pos_tween = create_tween()
 	var rot_tween = create_tween()
-	pos_tween.tween_property(camera,"position", setups[where]["pos"], TRANSITION_TIME).set_trans(Tween.TRANS_CUBIC)
-	rot_tween.tween_property(camera,"rotation_degrees", setups[where]["rot"], TRANSITION_TIME).set_trans(Tween.TRANS_CUBIC)
+	pos_tween.tween_property(camera,"position", setups[where]["pos"], transition_time).set_trans(Tween.TRANS_CUBIC)
+	rot_tween.tween_property(camera,"rotation_degrees", setups[where]["rot"], transition_time).set_trans(Tween.TRANS_CUBIC)
 	emit_signal("room_camera_moved", where)
 
 func _input(event: InputEvent) -> void:

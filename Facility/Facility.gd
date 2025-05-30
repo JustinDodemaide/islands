@@ -1,7 +1,7 @@
 extends Node3D
 class_name Facility
 
-var occupied_by:Faction
+var occupied_by:Faction = Faction.new()
 
 var island_pos:Vector2 = Vector2.ZERO
 
@@ -16,6 +16,9 @@ var selection_options = [
 
 func _init(island_pos:Vector2, file = null) -> void:
 	self.island_pos = island_pos
+
+func name() -> String:
+	return "Facility"
 
 func mesh() -> MeshInstance3D:
 	return null

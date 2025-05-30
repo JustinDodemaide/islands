@@ -7,11 +7,14 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_32bfh"]
 bg_color = Color(0, 0, 0, 1)
 
-[node name="FacilityOverview" type="Node"]
+[node name="FacilityOverview" type="Node" node_paths=PackedStringArray("name_label", "faction_label", "production_label", "actions_label")]
 script = ExtResource("1_c35ho")
+name_label = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Name")
+faction_label = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Faction")
+production_label = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Production")
+actions_label = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Actions")
 
 [node name="Control" type="PanelContainer" parent="."]
-visible = false
 modulate = Color(0.388235, 0.780392, 0.301961, 1)
 custom_minimum_size = Vector2(1024, 768)
 anchors_preset = 15
@@ -44,16 +47,9 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("3_rlgnh")
-expand_mode = 2
-
-[node name="VSeparator" type="VSeparator" parent="Control/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 10
 
 [node name="Name" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -61,11 +57,17 @@ theme_override_fonts/font = ExtResource("1_wt14u")
 theme_override_font_sizes/font_size = 48
 text = "NAME"
 
-[node name="Ownership" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Faction" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_wt14u")
 theme_override_font_sizes/font_size = 48
-text = "OWNERSHIP"
+text = "FACTION"
+
+[node name="HSeparator2" type="HSeparator" parent="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
 
 [node name="Production" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -73,8 +75,24 @@ theme_override_fonts/font = ExtResource("1_wt14u")
 theme_override_font_sizes/font_size = 48
 text = "PRODUCTION"
 
+[node name="HSeparator3" type="HSeparator" parent="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
 [node name="Actions" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_wt14u")
 theme_override_font_sizes/font_size = 48
 text = "ACTIONS"
+
+[node name="HSeparator4" type="HSeparator" parent="Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/VBoxContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("3_rlgnh")
+expand_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="Control/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
