@@ -12,9 +12,6 @@ func new():
 	id = str(randi())
 	_generate()
 
-func from_file(file = null):
-	pass
-
 class IslandTile:
 	var pos:Vector2
 	var altitude:float
@@ -46,7 +43,7 @@ func _generate():
 		facilities.append(facility)
 
 func save() -> void:
-	var island_save_file = FileAccess.open("user://Islands" + id + ".save", FileAccess.WRITE)
+	var island_save_file = FileAccess.open("user://Island" + id + ".save", FileAccess.WRITE)
 	# tiles
 	island_save_file.store_line(JSON.stringify(tiles))
 	# facilities
@@ -58,4 +55,4 @@ func save() -> void:
 
 func load_from_id(id:String) -> void:
 	self.id = id
-	var island_save_file = FileAccess.open("user://Islands" + id + ".save", FileAccess.READ)
+	var island_save_file = FileAccess.open("user://Islands/" + id + ".save", FileAccess.READ)

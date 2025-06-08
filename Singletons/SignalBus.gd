@@ -1,5 +1,6 @@
 extends Node
 
+var new_game = true
 var game:Game
 
 signal game_update
