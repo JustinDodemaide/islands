@@ -15,6 +15,7 @@ production_label = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer
 actions_label = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Actions")
 
 [node name="Control" type="PanelContainer" parent="."]
+visible = false
 modulate = Color(0.388235, 0.780392, 0.301961, 1)
 custom_minimum_size = Vector2(1024, 768)
 anchors_preset = 15
