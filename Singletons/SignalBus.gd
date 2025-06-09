@@ -1,7 +1,6 @@
 extends Node
 
-var new_game = true
-var game_id:String
+var game_params:Dictionary = {}
 var game:Game
 
 signal game_tick

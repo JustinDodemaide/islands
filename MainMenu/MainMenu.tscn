@@ -1,25 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://cx3qlnw3riwop"]
+[gd_scene load_steps=5 format=3 uid="uid://cx3qlnw3riwop"]
 
 [ext_resource type="Script" uid="uid://bi4tlyh7arlml" path="res://MainMenu/MainMenu.gd" id="1_otibh"]
+[ext_resource type="PackedScene" uid="uid://suwdy1kh1xbr" path="res://MainMenu/Views/Main/Main.tscn" id="2_cruaa"]
+[ext_resource type="PackedScene" uid="uid://b0q1w2yxivwk5" path="res://MainMenu/Views/New/New.tscn" id="3_b76km"]
+[ext_resource type="PackedScene" uid="uid://brqxw6fla8sws" path="res://MainMenu/Views/Load/Load.tscn" id="4_lbqne"]
 
-[node name="MainMenu" type="Node"]
+[node name="MainMenu" type="Node" node_paths=PackedStringArray("initial_state")]
 script = ExtResource("1_otibh")
+initial_state = NodePath("MainView")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -21.0
-offset_top = -33.0
-offset_right = 21.0
-offset_bottom = 33.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="MainView" parent="." instance=ExtResource("2_cruaa")]
 
-[node name="new" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "new"
+[node name="New" parent="." instance=ExtResource("3_b76km")]
 
-[connection signal="pressed" from="VBoxContainer/new" to="." method="_on_new_pressed"]
+[node name="Load" parent="." instance=ExtResource("4_lbqne")]

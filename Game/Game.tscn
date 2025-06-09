@@ -5,12 +5,9 @@
 [node name="Game" type="Node"]
 script = ExtResource("1_hqwdr")
 
-[node name="UpdateTimer" type="Timer" parent="."]
-
-[node name="Button" type="Button" parent="."]
+[node name="Save" type="Button" parent="."]
 offset_right = 8.0
 offset_bottom = 8.0
 text = "Save"
 
-[connection signal="timeout" from="UpdateTimer" to="." method="_on_update_timer_timeout"]
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Save" to="." method="_on_button_pressed"]

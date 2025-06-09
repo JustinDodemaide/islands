@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cxl6ry5py0og7"]
 
-[ext_resource type="Script" uid="uid://xkrj57jver6j" path="res://MainMenu/LoadSaveButton.gd" id="1_81j3g"]
+[ext_resource type="Script" uid="uid://xkrj57jver6j" path="res://MainMenu/Views/Load/Button/LoadGameButton.gd" id="1_81j3g"]
 
 [node name="LoadSave" type="Button"]
 offset_right = 8.0

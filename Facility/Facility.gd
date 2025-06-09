@@ -3,7 +3,7 @@ class_name Facility
 
 var id:String
 
-var occupied_by:Faction = Faction.new()
+var occupied_by:Player
 
 var island_pos:Vector2 = Vector2.ZERO
 

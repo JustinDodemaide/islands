@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://brqxw6fla8sws"]
+
+[ext_resource type="Script" uid="uid://bwbm1p4ak2vad" path="res://MainMenu/Views/Load/Load.gd" id="1_kf8nu"]
+[ext_resource type="FontFile" uid="uid://cix7r24147sx8" path="res://Fonts/battlenet.ttf" id="1_pq8yp"]
+
+[node name="Load" type="Node"]
+script = ExtResource("1_kf8nu")
+
+[node name="Control" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_pq8yp")
+theme_override_font_sizes/font_size = 48
+text = "LOAD GAME"
+
+[node name="HSeparator" type="HSeparator" parent="Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="Buttons" type="VBoxContainer" parent="Control/VBoxContainer"]
+layout_mode = 2
