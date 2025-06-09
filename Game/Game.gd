@@ -19,61 +19,49 @@ var id:String
 func new_game(parameters:Dictionary):
 	id = str(randi())
 	
-	var num_islands = 1
-	for i in num_islands:
-		var island = preload("res://Island/Island.gd").new()
-		island.new()
-		islands.append(island)
-	active_island = islands.front()
+	var island = preload("res://Island/Island.gd").new()
+	island.new()
+	
+	players.append(Player.new())
+	players.append(Player.new(true))
+	
 	add_child(load("res://Room/Room.tscn").instantiate())
 	$Room.game_done_initializing()
 
 func continue_game(parameters:Dictionary) -> void:
 	id = parameters.game_id
-	this_instances_player = players.front() # PLACEHOLDER
 	
 	var game_save_dictionary = SignalBus.retrieve_dictionary_from_file("Game" + id)
 	print(game_save_dictionary)
-	pass
+	
+	players.append(Player.new())
+	players.append(Player.new(true))
+	
+	turn_index = game_save_dictionary.turn_index
+	
+	var island = preload("res://Island/Island.gd").new()
+	island.load_from_id(game_save_dictionary.island_id)
 
 func _on_button_pressed() -> void:
 	save()
 	
 func save():
 	var game_save_dictionary = {
-		"island_id_list":[],
+		"island_id":island.id,
 		"turn_index":turn_index
 	}
-	
-	var islands_ids = []
-	# save islands
-	for island in islands:
-		game_save_dictionary["island_id_list"].append(island.id)
-		island.save()
 	
 	var game_save_file = FileAccess.open("user://Game" + id + ".save", FileAccess.WRITE)
 	game_save_file.store_line(JSON.stringify(game_save_dictionary))
 #endregion
 
-var players:Array[Player] = [Player.new(), Player.new(true)]
-var this_instances_player:Player
+var island:Island
+
+var players:Array[Player] = []
 var turn_index:int = 0
-var current_player:Player
 
 func next_turn():
-	pass
-
-var islands = []
-var active_island:Island
-
-var resource_amounts = {
-	"electricity":0,
-}
-
-func _on_update_timer_timeout() -> void:
-	SignalBus.emit_signal("game_tick")
-
-func game_tick():
-	var all_resource_production = active_island.get("_all_resource_production")
-	for resource in all_resource_production:
-		resource_amounts[resource] += all_resource_production[resource]
+	turn_index += 1
+	if turn_index == players.size():
+		turn_index = 0
+	players[turn_index].turn()

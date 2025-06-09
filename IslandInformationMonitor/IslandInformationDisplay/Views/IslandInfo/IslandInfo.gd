@@ -9,7 +9,7 @@ var production_labels = {}
 func _ready() -> void:
 	SignalBus.game_tick.connect(game_tick)
 	
-	for resource:String in SignalBus.game.resource_amounts:		
+	for resource:String in SignalBus.game.resource_amounts:
 		var name = duplicate_label.duplicate()
 		name.text = resource
 		grid.add_child(name)

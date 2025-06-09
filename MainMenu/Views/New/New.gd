@@ -10,6 +10,6 @@ func exit() -> void:
 func _on_begin_pressed() -> void:
 	var parameters = {
 		"new_game":true,
-		"players":["human","ai"]
+		"number_of_players":2
 	}
 	get_parent().start_game(parameters)
