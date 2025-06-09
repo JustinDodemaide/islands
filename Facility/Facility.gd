@@ -3,7 +3,7 @@ class_name Facility
 
 var id:String
 
-var occupied_by:Player
+var is_occupied_by_player:bool = true
 
 var island_pos:Vector2 = Vector2.ZERO
 

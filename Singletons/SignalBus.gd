@@ -3,10 +3,10 @@ extends Node
 var game_params:Dictionary = {}
 var game:Game
 
-signal game_tick
+signal resources_changed
+signal player_turn_ended
 
 signal facility_selected(facility:Facility)
-
 
 func retrieve_dictionary_from_file(filename:String) -> Dictionary:
 	# keeping this in a singleton is just convenient

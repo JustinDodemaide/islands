@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://d218omusohbj6"]
+
+[ext_resource type="Script" uid="uid://cj8fp5mbw1jr3" path="res://Room/Furniture/EndTurnButton/EndTurnButton.gd" id="1_6fwyb"]
+[ext_resource type="PackedScene" uid="uid://ddamrtusv1jg5" path="res://ClickableArea3D/ClickableArea3D.tscn" id="1_vygsa"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_6fwyb"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_432ie"]
+
+[node name="EndTurnButton" type="Node3D"]
+script = ExtResource("1_6fwyb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_6fwyb")
+
+[node name="ClickableArea3D" parent="." instance=ExtResource("1_vygsa")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ClickableArea3D"]
+shape = SubResource("BoxShape3D_432ie")
+
+[connection signal="pressed" from="ClickableArea3D" to="." method="_on_clickable_area_3d_pressed"]

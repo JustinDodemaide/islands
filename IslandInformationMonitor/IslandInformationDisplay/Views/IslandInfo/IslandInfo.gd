@@ -7,15 +7,16 @@ var amount_labels = {}
 var production_labels = {}
 
 func _ready() -> void:
-	SignalBus.game_tick.connect(game_tick)
+	SignalBus.resources_changed.connect(game_tick)
 	
-	for resource:String in SignalBus.game.resource_amounts:
+	for resource in SignalBus.game.player_resources:
+		var str = str(resource)
 		var name = duplicate_label.duplicate()
-		name.text = resource
+		name.text = str
 		grid.add_child(name)
 		
 		var amount = duplicate_label.duplicate()
-		amount.text = str(SignalBus.game.resource_amounts[resource])
+		amount.text = str(SignalBus.game.player_resources[resource])
 		grid.add_child(amount)
 		amount_labels[resource] = amount
 		
@@ -31,5 +32,5 @@ func exit() -> void:
 	$Control.visible = false
 
 func game_tick():
-	for resource in SignalBus.game.resource_amounts:
-		amount_labels[resource].text = str(SignalBus.game.resource_amounts)
+	for resource in SignalBus.game.player_resources:
+		amount_labels[resource].text = str(SignalBus.game.player_resources[resource])

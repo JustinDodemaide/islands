@@ -19,14 +19,11 @@ var id:String
 func new_game(parameters:Dictionary):
 	id = str(randi())
 	
-	var island = preload("res://Island/Island.gd").new()
+	island = preload("res://Island/Island.gd").new()
 	island.new()
 	
-	players.append(Player.new())
-	players.append(Player.new(true))
-	
-	add_child(load("res://Room/Room.tscn").instantiate())
-	$Room.game_done_initializing()
+	setup_complete()
+
 
 func continue_game(parameters:Dictionary) -> void:
 	id = parameters.game_id
@@ -34,34 +31,59 @@ func continue_game(parameters:Dictionary) -> void:
 	var game_save_dictionary = SignalBus.retrieve_dictionary_from_file("Game" + id)
 	print(game_save_dictionary)
 	
-	players.append(Player.new())
-	players.append(Player.new(true))
-	
-	turn_index = game_save_dictionary.turn_index
-	
-	var island = preload("res://Island/Island.gd").new()
+	island = preload("res://Island/Island.gd").new()
 	island.load_from_id(game_save_dictionary.island_id)
+	
+	player_resources = game_save_dictionary.player_resources
+	opponent_resources = game_save_dictionary.opponent_resources
+	
+	setup_complete()
+
+func setup_complete():
+	SignalBus.player_turn_ended.connect(next_turn)
+	room = load("res://Room/Room.tscn").instantiate()
+	add_child(room)
+	$Room.game_done_initializing()
 
 func _on_button_pressed() -> void:
 	save()
-	
+
 func save():
 	var game_save_dictionary = {
 		"island_id":island.id,
-		"turn_index":turn_index
+		"player_resources":player_resources,
+		"opponent_resources":opponent_resources,
 	}
 	
 	var game_save_file = FileAccess.open("user://Game" + id + ".save", FileAccess.WRITE)
 	game_save_file.store_line(JSON.stringify(game_save_dictionary))
 #endregion
 
+var room
 var island:Island
 
-var players:Array[Player] = []
-var turn_index:int = 0
+var player_turn:bool = true
+
+var player_resources = {
+	Item.RESOURCE_CATEGORIES.ELECTRICITY:0
+}
+
+var opponent_resources = {
+	Item.RESOURCE_CATEGORIES.ELECTRICITY:0
+}
 
 func next_turn():
-	turn_index += 1
-	if turn_index == players.size():
-		turn_index = 0
-	players[turn_index].turn()
+	distribute_resources()
+	player_turn = not player_turn
+	if not player_turn:
+		room.move_camera("island")
+		
+
+func distribute_resources():
+	for facility in island.facilities:
+		for resource in facility.produced_resources:
+			if facility.is_occupied_by_player:
+				player_resources[resource] += facility.produced_resources[resource]
+			else:
+				opponent_resources[resource] += facility.produced_resources[resource]
+	SignalBus.emit_signal("resources_changed")
