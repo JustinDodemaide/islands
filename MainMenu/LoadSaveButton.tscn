@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxl6ry5py0og7"]
+
+[ext_resource type="Script" uid="uid://xkrj57jver6j" path="res://MainMenu/LoadSaveButton.gd" id="1_81j3g"]
+
+[node name="LoadSave" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("1_81j3g")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

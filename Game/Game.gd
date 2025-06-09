@@ -20,20 +20,18 @@ var resource_amounts = {
 	"electricity":0,
 }
 
-var resource_production = {
-	"electricity":1,
-}
-
 func _ready() -> void:
 	SignalBus.game = self
 	
 	if SignalBus.new_game:
 		_new()
 	else:
-		load_from_file("605754991")
+		load_from_file()
 	add_child(load("res://Room/Room.tscn").instantiate())
 	$Room.game_done_initializing()
-
+	
+	SignalBus.game_tick.connect(game_tick)
+	$UpdateTimer.start(1)
 
 func _new():
 	id = str(randi())
@@ -49,37 +47,35 @@ func _new():
 	add_child(load("res://Room/Room.tscn").instantiate())
 
 func save():
-	# game details
-	var game_save_file = FileAccess.open("user://Game" + id + ".save", FileAccess.WRITE)
-	game_save_file.store_line(JSON.stringify(resource_amounts))
-	game_save_file.store_line(JSON.stringify(resource_production))
+	var game_save_dictionary = {
+		"island_id_list":[]
+	}
 	
 	var islands_ids = []
 	# save islands
 	for island in islands:
-		islands_ids.append(island.id)
+		game_save_dictionary["island_id_list"].append(island.id)
 		island.save()
-	game_save_file.store_line(JSON.stringify(islands_ids))
-
-func load_from_file(id:String) -> void:
-	self.id = id
-	if not FileAccess.file_exists("user://Game" + id + ".save"):
-		return
 	
-	var save_file = FileAccess.open("user://Game" + id + ".save", FileAccess.READ)
-	while save_file.get_position() < save_file.get_length():
-		var json_string = save_file.get_line()
-	
-		var json = JSON.new()
-	
-		var parse_result = json.parse(json_string)
-		if not parse_result == OK:
-			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
-			continue
+	var game_save_file = FileAccess.open("user://Game" + id + ".save", FileAccess.WRITE)
+	game_save_file.store_line(JSON.stringify(game_save_dictionary))
 
-		var node_data = json.data
-		print(node_data)
-
+func load_from_file() -> void:
+	self.id = SignalBus.game_id
+	
+	var game_save_dictionary = SignalBus.retrieve_dictionary_from_file("Game" + id)
+	print(game_save_dictionary)
+	pass
+	#active_island = islands.front()
 
 func _on_button_pressed() -> void:
 	save()
+
+
+func _on_update_timer_timeout() -> void:
+	SignalBus.emit_signal("game_tick")
+
+func game_tick():
+	var all_resource_production = active_island.get("_all_resource_production")
+	for resource in all_resource_production:
+		resource_amounts[resource] += all_resource_production[resource]

@@ -8,6 +8,8 @@ var WIDTH = 100
 var tiles = {}
 var facilities:Array[Facility] = []
 
+var _all_resource_production:Dictionary = {}
+
 func new():
 	id = str(randi())
 	_generate()
@@ -43,16 +45,27 @@ func _generate():
 		facilities.append(facility)
 
 func save() -> void:
-	var island_save_file = FileAccess.open("user://Island" + id + ".save", FileAccess.WRITE)
-	# tiles
-	island_save_file.store_line(JSON.stringify(tiles))
-	# facilities
-	var facility_ids = []
+	var island_save_dictionary = {
+		"facility_ids":[]
+	}
+	 
+	# facilities ids
 	for facility in facilities:
-		facility_ids.append(facility.id)
+		island_save_dictionary["facility_ids"].append(facility.id)
 		facility.save()
-	island_save_file.store_line(JSON.stringify(facility_ids))
+		
+	var island_save_file = FileAccess.open("user://Island" + id + ".save", FileAccess.WRITE)
+	island_save_file.store_line(JSON.stringify(island_save_dictionary))
 
 func load_from_id(id:String) -> void:
 	self.id = id
-	var island_save_file = FileAccess.open("user://Islands/" + id + ".save", FileAccess.READ)
+	var save_dictionary = SignalBus.retrieve_dictionary_from_file("Island" + id)
+	
+
+	for facility in facilities:
+		for resource in facility.produced_resources:
+			var production = facility.produced_resources[resource]
+			if _all_resource_production.has(resource):
+				_all_resource_production[resource] += production
+			else:
+				_all_resource_production[resource] = production
