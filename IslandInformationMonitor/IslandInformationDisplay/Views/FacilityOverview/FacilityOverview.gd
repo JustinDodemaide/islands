@@ -1,24 +1,32 @@
 extends State
 
+var facilitiy_selected = false
 @export var name_label:Label
 @export var faction_label:Label
 @export var production_label:Label
 @export var actions_label:Label
 
-
 func _ready() -> void:
 	SignalBus.facility_selected.connect(facility_selected)
+	SignalBus.facility_deselected.connect(facility_deselected)
 
 func facility_selected(facility:Facility):
-	print("selected")
+	facilitiy_selected = true
+	if get_parent().get_parent().state == self:
+		$"No facility selected".visible = false
+		$Control.visible = true
+	
 	name_label.text = facility.name().to_upper()
 	
-	faction_label.text = "OCCUPIED BY " + facility.occupied_by.name
+	if facility.is_occupied_by_player:
+		faction_label.text = "OCCUPIED BY PLAYER"
+	else:
+		faction_label.text = "OCCUPIED BY OPPONENT"
 	faction_label.text = faction_label.text.to_upper()
 	
 	production_label.text = "Produces\n"
 	for resource in facility.produced_resources:
-		production_label.text += str(resource) + " ... " + str(facility.produced_resources[resource])
+		production_label.text += str(Item.RESOURCE_CATEGORIES.keys()[resource]) + " ... " + str(facility.produced_resources[resource])
 	production_label.text = production_label.text.to_upper()
 	
 	actions_label.text = "Options:\n"
@@ -26,8 +34,20 @@ func facility_selected(facility:Facility):
 		actions_label.text += "- " + option.name() + "\n"
 	actions_label.text = actions_label.text.to_upper()
 
+func facility_deselected():
+	facilitiy_selected = true
+	if get_parent().get_parent().state == self:
+		$"No facility selected".visible = true
+		$Control.visible = false
+
 func enter(previous_state_path: String = "", data := {}) -> void:
-	$Control.visible = true
+	if facilitiy_selected:
+		$Control.visible = true
+	else:
+		$"No facility selected".visible = true
 
 func exit() -> void:
-	$Control.visible = false
+	if facilitiy_selected:
+		$Control.visible = false
+	else:
+		$"No facility selected".visible = false

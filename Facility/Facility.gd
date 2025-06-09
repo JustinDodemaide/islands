@@ -21,7 +21,7 @@ func _init(pos:Vector2):
 	self.island_pos = island_pos
 
 func name() -> String:
-	return "Facility"
+	return "Facility Name"
 
 func mesh() -> MeshInstance3D:
 	return null

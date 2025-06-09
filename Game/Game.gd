@@ -77,7 +77,7 @@ func next_turn():
 	player_turn = not player_turn
 	if not player_turn:
 		room.move_camera("island")
-		
+		ai_decision()
 
 func distribute_resources():
 	for facility in island.facilities:
@@ -87,3 +87,9 @@ func distribute_resources():
 			else:
 				opponent_resources[resource] += facility.produced_resources[resource]
 	SignalBus.emit_signal("resources_changed")
+
+func ai_decision():
+	var tween = create_tween()
+	tween.tween_interval(2)
+	await tween.finished
+	next_turn()

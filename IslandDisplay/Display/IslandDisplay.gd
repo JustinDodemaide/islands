@@ -92,12 +92,15 @@ func _process(delta: float) -> void:
 @export var hover_indicator:Label3D
 var hovered_icon:IslandDisplayIcon
 func _handle_raycast():
+	if not receiving_input:
+		return
 	if Input.is_action_pressed("E"):
 		if hovered_icon:
 			_icon_selected()
 		else:
 			$SubViewport/CanvasLayer/Border.stop_tracking()
 			emit_signal("icon_deselected")
+			SignalBus.emit_signal("facility_deselected")
 	
 	var collider = raycast.get_collider()
 	if collider == null:

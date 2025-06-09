@@ -97,3 +97,7 @@ func _on_island_display_icon_selected(icon: IslandDisplayIcon) -> void:
 
 func _on_island_display_icon_deselected() -> void:
 	$SelectionApparatus.clear()
+
+
+func _on_room_camera_moved(setup: String) -> void:
+	pass # Replace with function body.

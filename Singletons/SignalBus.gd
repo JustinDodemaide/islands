@@ -7,6 +7,7 @@ signal resources_changed
 signal player_turn_ended
 
 signal facility_selected(facility:Facility)
+signal facility_deselected(facility:Facility)
 
 func retrieve_dictionary_from_file(filename:String) -> Dictionary:
 	# keeping this in a singleton is just convenient
