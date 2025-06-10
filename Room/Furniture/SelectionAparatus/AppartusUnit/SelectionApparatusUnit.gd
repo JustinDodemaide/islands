@@ -81,5 +81,6 @@ func press_button():
 	var tween2 = create_tween()
 	tween2.tween_property($button,"position",button_initial_pos,0.1)
 	
-	
 	get_parent().facility.option_selected(option)
+	reset()
+	get_parent().set_options(get_parent().facility)

@@ -9,6 +9,7 @@ var facilitiy_selected = false
 func _ready() -> void:
 	SignalBus.facility_selected.connect(facility_selected)
 	SignalBus.facility_deselected.connect(facility_deselected)
+	SignalBus.facility_updated.connect(facility_selected)
 
 func facility_selected(facility:Facility):
 	facilitiy_selected = true

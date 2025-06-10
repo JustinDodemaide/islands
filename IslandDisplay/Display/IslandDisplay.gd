@@ -12,7 +12,7 @@ func init():
 	for facility in island.facilities:
 		var icon = icon_scene.instantiate()
 		icon.init(facility)
-		icon.position = Vector3(-randf_range(13,14), -randf_range(50,51), 0)
+		icon.position = Vector3(-randf_range(10,15), -randf_range(45,50), 0)
 		$SubViewport.add_child(icon)
 	enable()
 

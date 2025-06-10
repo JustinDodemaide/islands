@@ -17,6 +17,7 @@ func option_selected(option:FACILITY_SELECTION_OPTIONS) -> void:
 			upgrade()
 		FACILITY_SELECTION_OPTIONS.MISSION:
 			pass
+	SignalBus.emit_signal("facility_updated",self)
 
 func upgrade():
 	if tier == MAX_TIER:
