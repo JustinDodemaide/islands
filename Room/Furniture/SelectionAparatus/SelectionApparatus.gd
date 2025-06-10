@@ -12,7 +12,7 @@ func set_options(facility:Facility):
 	var children = get_children()
 	children.reverse()
 	for option in facility.selection_options:
-		children[child_index].set_option(option)
+		children[child_index].set_option(option,facility.selection_options[option])
 		child_index += 1
 
 func clear():

@@ -4,7 +4,7 @@ func init():
 	$IslandDisplay.init()
 
 func _on_room_camera_moved(setup: String) -> void:
-	if setup == "island":
+	if setup == "island" or setup == "island_selection":
 		$IslandDisplayController.enable()
 		$IslandDisplay.receiving_input = true
 	else:

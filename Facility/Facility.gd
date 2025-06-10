@@ -23,9 +23,8 @@ func option_selected(option:FACILITY_SELECTION_OPTIONS) -> void:
 #region Saving and Loading
 var id:String
 
-func _init(pos:Vector2):
+func _init():
 	id = str(randi())
-	self.island_pos = island_pos
 
 func save() -> void:
 	var facility_save_file = FileAccess.open("user://Facility" + id + ".save", FileAccess.WRITE)

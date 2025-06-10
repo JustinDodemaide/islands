@@ -3,10 +3,10 @@ extends Node3D
 var enabled:bool = false
 var option:Facility.FACILITY_SELECTION_OPTIONS
 
-func set_option(option:Facility.FACILITY_SELECTION_OPTIONS, disabled = false) -> void:
+func set_option(option:Facility.FACILITY_SELECTION_OPTIONS, option_enabled:bool) -> void:
 	self.option = option
 	$Label3D.text = Facility.FACILITY_SELECTION_OPTIONS.keys()[option]
-	if not disabled:
+	if option_enabled:
 		enable()
 
 func reset() -> void:
