@@ -1,24 +1,8 @@
 extends Node3D
 class_name Facility
 
-var id:String
-
 var is_occupied_by_player:bool = true
-
 var island_pos:Vector2 = Vector2.ZERO
-
-var produced_resources:Dictionary = {
-	Item.RESOURCE_CATEGORIES.ELECTRICITY: 1
-}
-
-var selection_options = [
-	preload("res://SelectionOptions/Upgrade.gd").new(),
-	preload("res://SelectionOptions/Mission.gd").new(),
-]
-
-func _init(pos:Vector2):
-	id = str(randi())
-	self.island_pos = island_pos
 
 func name() -> String:
 	return "Facility Name"
@@ -26,19 +10,37 @@ func name() -> String:
 func mesh() -> MeshInstance3D:
 	return null
 
-func get_selection_options() -> Array:
-	for option in selection_options:
-		option.update_availability(self)
+
+enum FACILITY_SELECTION_OPTIONS {UPGRADE,MISSION}
+@export var selection_options:Dictionary[FACILITY_SELECTION_OPTIONS,bool] = {}
+
+func get_selection_options() -> Dictionary[FACILITY_SELECTION_OPTIONS,bool]:
 	return selection_options
 
+func option_selected(option:FACILITY_SELECTION_OPTIONS) -> void:
+	pass
+
+#region Saving and Loading
+var id:String
+
+func _init(pos:Vector2):
+	id = str(randi())
+	self.island_pos = island_pos
+
 func save() -> void:
-	var facility_save_dictionary = {
-		
-	}
-	
 	var facility_save_file = FileAccess.open("user://Facility" + id + ".save", FileAccess.WRITE)
-	facility_save_file.store_line(JSON.stringify(id))
+	facility_save_file.store_line(JSON.stringify(get_save_dictionary()))
 
 func load_from_id(id:String) -> void:
 	self.id = id
 	var save_dictionary = SignalBus.retrieve_dictionary_from_file("Facility" + id)
+	restore(save_dictionary)
+
+# Needs to be changed by inherited class
+func get_save_dictionary() -> Dictionary:
+	return {}
+
+# Needs to be changed by inherited class
+func restore(save_dictionary:Dictionary) -> void:
+	pass
+#endregion

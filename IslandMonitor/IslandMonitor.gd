@@ -1,5 +1,7 @@
 extends Node3D
 
+func init():
+	$IslandDisplay.init()
 
 func _on_room_camera_moved(setup: String) -> void:
 	if setup == "island":

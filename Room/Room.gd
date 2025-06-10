@@ -7,6 +7,7 @@ func game_done_initializing():
 	# activate the game display and island display
 	game = get_parent()
 	#$Monitor/IslandDisplay.init(game.active_island)
+	$IslandMonitor.init()
 
 @onready var camera = $Camera3D
 @export var initial_setup:String = "wide"

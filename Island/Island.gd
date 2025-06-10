@@ -38,11 +38,12 @@ func _generate():
 				tiles[Vector2(x,y)] = tile
 	
 	# Place the facilities
-	var num_facilities = 3
+	var num_facilities = 1
 	for i in num_facilities:
 		var tile = tiles.keys().pick_random()
-		var facility = load("res://Facility/Facility.gd").new(tile)
+		var facility = preload("res://Facility/PowerPlant/PowerPlant.tscn").instantiate()
 		facilities.append(facility)
+		pass
 
 func save() -> void:
 	var island_save_dictionary = {

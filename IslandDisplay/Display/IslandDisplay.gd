@@ -3,10 +3,17 @@ class_name IslandDisplay
 
 var enabled = true
 
-func init(island:Island):
+func init():
+	var island = SignalBus.game.island
 	var terrain_mesh = _make_3d_model(island)
-	
 	$SubViewport.add_child(terrain_mesh)
+	
+	var icon_scene = preload("res://IslandDisplay/FacilityIcon/FacilityIcon.tscn")
+	for facility in island.facilities:
+		var icon = icon_scene.instantiate()
+		icon.init(facility)
+		icon.position = Vector3(-randf_range(13,14), -randf_range(50,51), 0)
+		$SubViewport.add_child(icon)
 	enable()
 
 func facilities(island) -> void:

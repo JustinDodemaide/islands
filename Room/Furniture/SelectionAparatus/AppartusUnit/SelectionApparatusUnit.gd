@@ -1,17 +1,17 @@
 extends Node3D
 
 var enabled:bool = false
-var option:SelectionOption
+var option:Facility.FACILITY_SELECTION_OPTIONS
 
-func set_option(option:SelectionOption, disabled = false) -> void:
+func set_option(option:Facility.FACILITY_SELECTION_OPTIONS, disabled = false) -> void:
 	self.option = option
-	$Label3D.text = option.name()
+	$Label3D.text = Facility.FACILITY_SELECTION_OPTIONS.keys()[option]
 	if not disabled:
 		enable()
 
 func reset() -> void:
 	$Label3D.text = ""
-	self.option = null
+	self.option = -1
 	disable()
 
 func enable():
@@ -81,4 +81,5 @@ func press_button():
 	var tween2 = create_tween()
 	tween2.tween_property($button,"position",button_initial_pos,0.1)
 	
-	option.selected(get_parent().facility)
+	
+	get_parent().facility.option_selected(option)

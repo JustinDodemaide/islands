@@ -25,13 +25,13 @@ func facility_selected(facility:Facility):
 	faction_label.text = faction_label.text.to_upper()
 	
 	production_label.text = "Produces\n"
-	for resource in facility.produced_resources:
-		production_label.text += str(Item.RESOURCE_CATEGORIES.keys()[resource]) + " ... " + str(facility.produced_resources[resource])
+	for resource in facility.production:
+		production_label.text += str(Item.RESOURCE_CATEGORIES.keys()[resource]) + " ... " + str(facility.production[resource])
 	production_label.text = production_label.text.to_upper()
 	
 	actions_label.text = "Options:\n"
 	for option in facility.selection_options:
-		actions_label.text += "- " + option.name() + "\n"
+		actions_label.text += "- " + Facility.FACILITY_SELECTION_OPTIONS.keys()[option] + "\n"
 	actions_label.text = actions_label.text.to_upper()
 
 func facility_deselected():

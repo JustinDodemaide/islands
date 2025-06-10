@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://db4bwqdlqkr61"]
+
+[ext_resource type="Script" uid="uid://08tvwuohpgq5" path="res://Facility/PowerPlant/PowerPlant.gd" id="1_iu0jn"]
+
+[node name="PowerPlant" type="Node3D"]
+script = ExtResource("1_iu0jn")
+selection_options = Dictionary[int, bool]({
+0: false,
+1: false
+})
