@@ -21,6 +21,18 @@ func facilities(island) -> void:
 		pass
 
 func _make_3d_model(island) -> MeshInstance3D:
+	var cube_size = 1 # 1 meter
+		#var pos:Vector2
+		#var altitude:float
+	var model = MeshInstance3D.new()
+	var cube_scene = load("res://IslandDisplay/Display/Cube/IslandMeshCube.tscn")
+	for tile in island.tiles:
+		var new_cube = cube_scene.instantiate()
+		model.add_child(new_cube)
+		new_cube.init(tile)
+	return model
+
+func _make_3d_model_OLD(island) -> MeshInstance3D:
 	#return load("res://IslandDisplay/placeholder.tscn").instantiate()
 	
 	var tile_to_feet_ratio = 12

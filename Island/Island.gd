@@ -17,26 +17,39 @@ func new():
 class IslandTile:
 	var pos:Vector2
 	var altitude:float
-	func _init(pos:Vector2) -> void:
+	func _init(pos:Vector2, altitude:float) -> void:
 		self.pos = pos
+		self.altitude = altitude
 
 func _generate():
 	# Make the island's terrain
 	var center_x = WIDTH / 2
 	var center_y = HEIGHT / 2
+	var center = Vector2(center_x,center_y)
 	var radius = 5
-
-	for y in range(HEIGHT):
-		for x in range(WIDTH):
-			# Calculate distance from this tile to the center
-			var distance = sqrt(pow(x - center_x, 2) + pow(y - center_y, 2))
-			
-			# If the tile is within the radius, make it part of the island
-			if distance <= radius:
-				# Create a new IslandTile for this position
-				var tile = IslandTile.new(Vector2(x,y))
-				tiles[Vector2(x,y)] = tile
 	
+	var noise = FastNoiseLite.new()
+	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
+	noise.set_frequency(0.05)
+	randomize()
+	noise.seed = randi()
+	var altidudes = []
+	
+	for theta in 360:
+		for r in radius:
+			if r == radius - 1:
+				r += randi_range(-3,3)
+				# This adds some randomness to the edges of the island to
+				# make it look more natural
+			var x = round(radius * cos(theta))
+			var y = round(radius * sin(theta))
+			var pos = Vector2(x,y) + center
+			var altitude = abs(noise.get_noise_2dv(pos))
+			print(altitude)
+			
+			var tile = IslandTile.new(pos, altitude)
+			tiles[tile] = pos
+		
 	# Place the facilities
 	var num_facilities = 1
 	for i in num_facilities:
