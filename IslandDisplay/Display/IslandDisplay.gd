@@ -16,11 +16,37 @@ func init():
 		$SubViewport.add_child(icon)
 	enable()
 
-func facilities(island) -> void:
-	for facility in island.facilities:
-		pass
+func _make_3d_model(island) -> MultiMeshInstance3D:
+	var multimesh_instance = MultiMeshInstance3D.new()
+	var multimesh = MultiMesh.new()
+	
+	multimesh.use_colors = true
+	multimesh.transform_format = MultiMesh.TRANSFORM_3D
+	multimesh.instance_count = island.tiles.size()
+	
+	var cube_mesh = BoxMesh.new()
+	cube_mesh.size = Vector3(1, 1, 1)
+	
+	var material = preload("res://IslandDisplay/placeholder.tres")
+	cube_mesh.material = material
+	
+	multimesh.mesh = cube_mesh
+	
+	var index = 0
+	for tile in island.tiles:
+		var transform = Transform3D()
+		transform.origin = tile.pos
+		multimesh.set_instance_transform(index, transform)
+		
+		var color = Color(0.8 + randf() * 0.2, 0.8 + randf() * 0.2, 0.8 + randf() * 0.2)
+		multimesh.set_instance_color(index, color)
+		
+		index += 1
+	
+	multimesh_instance.multimesh = multimesh
+	return multimesh_instance
 
-func _make_3d_model(island) -> MeshInstance3D:
+func _make_3d_model_OLD(island) -> MeshInstance3D:
 	var cube_size = 1 # 1 meter
 		#var pos:Vector2
 		#var altitude:float
@@ -34,67 +60,6 @@ func _make_3d_model(island) -> MeshInstance3D:
 		$SubViewport/Camera3D.position.x = new_cube.position.z
 
 	return model
-
-func _make_3d_model_OLD(island) -> MeshInstance3D:
-	#return load("res://IslandDisplay/placeholder.tscn").instantiate()
-	
-	var tile_to_feet_ratio = 12
-	# Create the mesh for the island
-	if island.tiles.is_empty():
-		return null
-	
-	# Create mesh data
-	var st = SurfaceTool.new()
-	st.begin(Mesh.PRIMITIVE_TRIANGLES)
-	
-	# Create a mapping of positions to vertex indices
-	var position_to_index = {}
-	var index = 0
-	
-	# First pass: add all vertices and map their positions to indices
-	for pos in island.tiles.keys():
-		var x = pos.x
-		var y = pos.y
-		var altitude = island.tiles[pos].altitude
-		
-		st.set_uv(pos * tile_to_feet_ratio)
-		st.add_vertex(Vector3(x, altitude, y) * tile_to_feet_ratio)
-		position_to_index[pos] = index
-		index += 1
-	
-	# Second pass: create triangles only where all required vertices exist
-	for x in island.WIDTH:
-		for y in island.HEIGHT:
-			var pos00 = Vector2(x, y)
-			var pos10 = Vector2(x + 1, y)
-			var pos01 = Vector2(x, y + 1)
-			var pos11 = Vector2(x + 1, y + 1)
-			
-			# Only create a quad if all four corners exist
-			if position_to_index.has(pos00) and position_to_index.has(pos10) and \
-			   position_to_index.has(pos01) and position_to_index.has(pos11):
-				
-				# First triangle
-				st.add_index(position_to_index[pos00])
-				st.add_index(position_to_index[pos10])
-				st.add_index(position_to_index[pos01])
-				
-				# Second triangle
-				st.add_index(position_to_index[pos10])
-				st.add_index(position_to_index[pos11])
-				st.add_index(position_to_index[pos01])
-	
-	# Material
-	st.set_material(preload("res://IslandDisplay/placeholder.tres"))
-	
-	# Generate normals and assign mesh
-	var mesh_instance = MeshInstance3D.new()
-	st.generate_normals()
-	mesh_instance.mesh = st.commit()
-	
-	mesh_instance.rotation_degrees = Vector3(90,0,0)
-	mesh_instance.position = Vector3(0,0,0)
-	return mesh_instance
 
 func enable():
 	enabled = true

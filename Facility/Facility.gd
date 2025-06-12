@@ -1,15 +1,13 @@
 extends Node3D
 class_name Facility
 
+@export var facility_name:String = "Facility"
 var is_occupied_by_player:bool = true
 var island_pos:Vector3 = Vector3.ZERO
 
-func name() -> String:
-	return "Facility Name"
 
 func mesh() -> MeshInstance3D:
 	return null
-
 
 enum FACILITY_SELECTION_OPTIONS {UPGRADE,MISSION}
 @export var selection_options:Dictionary[FACILITY_SELECTION_OPTIONS,bool] = {}

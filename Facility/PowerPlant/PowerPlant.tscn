@@ -4,6 +4,7 @@
 
 [node name="PowerPlant" type="Node3D"]
 script = ExtResource("1_iu0jn")
+facility_name = "Power Plant"
 selection_options = Dictionary[int, bool]({
 0: false,
 1: false

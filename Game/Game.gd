@@ -93,3 +93,6 @@ func ai_decision():
 	tween.tween_interval(2)
 	await tween.finished
 	next_turn()
+
+func _process(delta: float) -> void:
+	$FPS.text = str(Engine.get_frames_per_second())

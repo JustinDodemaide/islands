@@ -24,4 +24,12 @@ text = "Save"
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_jxerj")
 
+[node name="FPS" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 23.0
+grow_horizontal = 0
+
 [connection signal="pressed" from="Save" to="." method="_on_button_pressed"]

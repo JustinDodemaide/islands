@@ -17,7 +17,7 @@ func facility_selected(facility:Facility):
 		$"No facility selected".visible = false
 		$Control.visible = true
 	
-	name_label.text = facility.name().to_upper()
+	name_label.text = facility.facility_name.to_upper()
 	
 	if facility.is_occupied_by_player:
 		faction_label.text = "OCCUPIED BY PLAYER"
