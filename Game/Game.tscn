@@ -1,6 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://ci0fyadtl32hg"]
+[gd_scene load_steps=6 format=3 uid="uid://ci0fyadtl32hg"]
 
 [ext_resource type="Script" uid="uid://bjqbrkkpjog0d" path="res://Game/Game.gd" id="1_hqwdr"]
+[ext_resource type="Texture2D" uid="uid://b6ap0gnm5tdpv" path="res://Skybox/AllSkyFree_Sky_ClearBlueSky_Equirect.png" id="2_vrr3t"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_iv3md"]
+panorama = ExtResource("2_vrr3t")
+
+[sub_resource type="Sky" id="Sky_37esa"]
+sky_material = SubResource("PanoramaSkyMaterial_iv3md")
+
+[sub_resource type="Environment" id="Environment_jxerj"]
+background_mode = 2
+sky = SubResource("Sky_37esa")
 
 [node name="Game" type="Node"]
 script = ExtResource("1_hqwdr")
@@ -9,5 +20,8 @@ script = ExtResource("1_hqwdr")
 offset_right = 8.0
 offset_bottom = 8.0
 text = "Save"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_jxerj")
 
 [connection signal="pressed" from="Save" to="." method="_on_button_pressed"]

@@ -22,11 +22,12 @@ class IslandTile:
 		self.altitude = altitude
 
 func _generate():
+	# Very unoptimized bu not going to fix it until it becomes a problem
 	# Make the island's terrain
 	var center_x = WIDTH / 2
 	var center_y = HEIGHT / 2
 	var center = Vector2(center_x,center_y)
-	var radius = 5
+	var radius = 50
 	
 	var noise = FastNoiseLite.new()
 	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
@@ -35,28 +36,39 @@ func _generate():
 	noise.seed = randi()
 	var altidudes = []
 	
+	var potential_facility_positions:Dictionary[Vector3, int] = {}
+	
 	for theta in 360:
 		for r in radius:
 			if r == radius - 1:
 				r += randi_range(-3,3)
 				# This adds some randomness to the edges of the island to
 				# make it look more natural
-			var x = round(radius * cos(theta))
-			var y = round(radius * sin(theta))
+			var x = round(r * cos(deg_to_rad(theta)))
+			var y = round(r * sin(deg_to_rad(theta)))
 			var pos = Vector2(x,y) + center
 			var altitude = abs(noise.get_noise_2dv(pos))
 			print(altitude)
 			
 			var tile = IslandTile.new(pos, altitude)
 			tiles[tile] = pos
-		
+			
+			var vector3_pos = Vector3(pos.x, altitude, pos.y)
+			potential_facility_positions[vector3_pos] = 0
+	
 	# Place the facilities
-	var num_facilities = 1
+	var facility_buffer_size = 6
+	var num_facilities = 10
 	for i in num_facilities:
-		var tile = tiles.keys().pick_random()
+		var vector3_pos:Vector3 = potential_facility_positions.keys().pick_random()
 		var facility = preload("res://Facility/PowerPlant/PowerPlant.tscn").instantiate()
 		facilities.append(facility)
-		pass
+		facility.island_pos = vector3_pos + Vector3(0, 1, 0)
+		
+		for length in range(-facility_buffer_size,facility_buffer_size):
+			for height in range(-facility_buffer_size,facility_buffer_size):
+				var buffer_pos:Vector3 = Vector3(length, 0, height) + facility.island_pos
+				potential_facility_positions.erase(buffer_pos)
 
 func save() -> void:
 	var island_save_dictionary = {

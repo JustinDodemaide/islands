@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://b2iedvlngsahw"]
+[gd_scene load_steps=5 format=3 uid="uid://b2iedvlngsahw"]
 
 [ext_resource type="Script" uid="uid://dwsueb2ncwh1f" path="res://IslandDisplay/Display/IslandDisplay.gd" id="1_shiw0"]
-[ext_resource type="PackedScene" uid="uid://vbwg1elsq8pr" path="res://Island/test_island.glb" id="2_a217a"]
 [ext_resource type="PackedScene" uid="uid://qxuahq4c07ia" path="res://IslandDisplay/Display/Border.tscn" id="4_t6pjv"]
 [ext_resource type="Texture2D" uid="uid://it6jit80xyoq" path="res://Island/dot.png" id="5_un01h"]
 
@@ -19,17 +18,13 @@ camera = NodePath("SubViewport/Camera3D")
 size = Vector2i(1024, 768)
 
 [node name="Camera3D" type="Camera3D" parent="SubViewport"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 100, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 50, 0)
 fov = 24.0
 
 [node name="RayCast3D" type="RayCast3D" parent="SubViewport/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 target_position = Vector3(0, -500, 0)
 collide_with_areas = true
-
-[node name="test_island" parent="SubViewport" instance=ExtResource("2_a217a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -55, 0)
-visible = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="SubViewport"]
 
@@ -58,6 +53,8 @@ texture = ExtResource("5_un01h")
 [node name="Label" type="Label" parent="SubViewport/CanvasLayer"]
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewport"]
 
 [node name="SelectionDebounce" type="Timer" parent="."]
 one_shot = true

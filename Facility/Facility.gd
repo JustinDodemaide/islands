@@ -2,7 +2,7 @@ extends Node3D
 class_name Facility
 
 var is_occupied_by_player:bool = true
-var island_pos:Vector2 = Vector2.ZERO
+var island_pos:Vector3 = Vector3.ZERO
 
 func name() -> String:
 	return "Facility Name"

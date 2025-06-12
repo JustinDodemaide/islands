@@ -12,7 +12,7 @@ func init():
 	for facility in island.facilities:
 		var icon = icon_scene.instantiate()
 		icon.init(facility)
-		icon.position = Vector3(-randf_range(10,15), -randf_range(45,50), 0)
+		icon.position = facility.island_pos
 		$SubViewport.add_child(icon)
 	enable()
 
@@ -30,6 +30,9 @@ func _make_3d_model(island) -> MeshInstance3D:
 		var new_cube = cube_scene.instantiate()
 		model.add_child(new_cube)
 		new_cube.init(tile)
+		$SubViewport/Camera3D.position.x = new_cube.position.x
+		$SubViewport/Camera3D.position.x = new_cube.position.z
+
 	return model
 
 func _make_3d_model_OLD(island) -> MeshInstance3D:
